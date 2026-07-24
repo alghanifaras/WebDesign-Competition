@@ -23,7 +23,7 @@ export default function SmartCityHome() {
       slug: "inovasi-ai-terbaru-di-bidang-kesehatan-2",
       judul: "Transformasi Digital Smart City Tingkatkan Pelayanan Publik",
       ringkasan: "Pemerintah kota mulai menerapkan sistem terintegrasi berbasis cloud untuk mempercepat pelaporan warga dan perizinan.",
-      kategori: "Pemerintahan",
+      kategori: "Teknologi",
       tanggal: "24 Jul 2026",
       thumbnail: "https://images.unsplash.com/photo-1573164713988-8665fc963095?auto=format&fit=crop&q=80&w=800"
     },
@@ -43,7 +43,7 @@ export default function SmartCityHome() {
       ringkasan: "Puluhan titik Stasiun Pengisian Kendaraan Listrik Umum (SPKLU) baru resmi beroperasi untuk mendukung mobilitas ramah lingkungan.",
       kategori: "Otomotif",
       tanggal: "22 Jul 2026",
-      thumbnail: "https://images.unsplash.com/photo-1558449039-c12496732386?auto=format&fit=crop&q=80&w=800"
+      thumbnail: "https://images.unsplash.com/photo-1593941707874-ef25b8b4a92b?q=80&w=1172&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
     },
   ];
 
