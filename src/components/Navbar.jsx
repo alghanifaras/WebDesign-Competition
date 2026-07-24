@@ -48,7 +48,7 @@ export default function Navbar() {
     };
   }, [scrollTimeout]);
 
-  // Disesuaikan dengan referensi desain
+  // Menu items
   const menuItems = [
     { label: "Home", hasDropdown: false, href: "#" },
     { label: "Traffic Maps", hasDropdown: false, href: "#" },
@@ -61,39 +61,41 @@ export default function Navbar() {
       <motion.nav
         layout
         initial={false}
-        animate={isScrolled ? "scrolled" : "top"}
+        animate={isScrolled && !isScrolling ? "scrolledCompact" : "top"}
         variants={{
           top: {
             width: "100%",
             maxWidth: "1100px",
             borderRadius: "24px",
             padding: "16px 24px",
-            backgroundColor: "rgba(255, 255, 255, 0.9)",
+            backgroundColor: "rgba(255, 255, 255, 0.7)",
             boxShadow: "0 4px 30px rgba(0, 0, 0, 0.03)",
+            backdropFilter: "blur(20px)",
+            border: "1px solid rgba(255, 255, 255, 0.8)",
           },
-          scrolled: {
-            width: isScrolling ? "320px" : "280px",
-            borderRadius: "999px",
-            padding: "10px 16px",
-            backgroundColor: "rgba(255, 255, 255, 0.85)",
-            boxShadow: "0 10px 40px rgba(0, 0, 0, 0.1)",
-            backdropFilter: "blur(12px)",
+          scrolledCompact: {
+            width: "auto",
+            borderRadius: "20px",
+            padding: "12px 20px",
+            backgroundColor: "rgba(255, 255, 255, 0.6)",
+            boxShadow: "0 8px 32px rgba(0, 0, 0, 0.08)",
+            backdropFilter: "blur(24px)",
+            border: "1px solid rgba(255, 255, 255, 0.75)",
           },
         }}
         transition={{
           type: "spring",
           stiffness: 300,
-          damping: 25,
+          damping: 30,
           mass: 0.5,
         }}
-        className="flex items-center justify-between border border-gray-100 backdrop-blur-md pointer-events-auto relative"
+        className="flex items-center justify-between pointer-events-auto relative"
       >
-        {/* Logo / Brand (Style Monotree) */}
+        {/* Logo */}
         <motion.div
           layout
           className="flex items-center gap-2 cursor-pointer text-gray-900 flex-shrink-0"
         >
-          {/* Custom SVG Logo menyerupai referensi */}
           <svg 
             width={isScrolled ? "20" : "24"} 
             height={isScrolled ? "20" : "24"} 
@@ -107,7 +109,7 @@ export default function Navbar() {
           </svg>
           <motion.span
             layout
-            className={`font-bold text-gray-900 tracking-tight ${
+            className={`font-bold text-gray-900 tracking-tight transition-all duration-300 ${
               isScrolled ? "text-sm" : "text-xl"
             } ${isScrolled && isScrolling ? "hidden" : ""}`}
           >
@@ -123,48 +125,51 @@ export default function Navbar() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -10, filter: "blur(4px)" }}
               transition={{ duration: 0.2 }}
-              className="hidden md:flex items-center gap-7 font-medium text-gray-700 text-[15px]"
+              className="hidden md:flex items-center gap-8 font-medium text-gray-700 text-[15px]"
             >
               {menuItems.map((item) => (
                 <a
                   key={item.label}
                   href={item.href}
-                  className="hover:text-black transition-colors flex items-center gap-1.5"
+                  className="hover:text-black transition-colors flex items-center gap-1.5 relative group"
                 >
                   {item.label}
                   {item.hasDropdown && <ChevronDown size={14} className="text-gray-500 mt-0.5" />}
+                  <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-green-500 to-emerald-500 group-hover:w-full transition-all duration-300" />
                 </a>
               ))}
             </motion.div>
           )}
         </AnimatePresence>
 
-        {/* Dynamic Island Menu - Submenu (Scrolled State) */}
+        {/* Compact Menu - Scrolled State (All menu items) */}
         <AnimatePresence mode="wait">
           {isScrolled && !isScrolling && (
             <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.8 }}
-              transition={{ duration: 0.15 }}
-              className="hidden md:flex flex-col gap-1 py-1 max-w-xs"
+              initial={{ opacity: 0, scale: 0.9, x: -10 }}
+              animate={{ opacity: 1, scale: 1, x: 0 }}
+              exit={{ opacity: 0, scale: 0.9, x: -10 }}
+              transition={{ duration: 0.2 }}
+              className="hidden md:flex items-center gap-2"
             >
-              {menuItems.slice(0, 2).map((item) => (
-                <a
+              {menuItems.map((item) => (
+                <motion.a
                   key={item.label}
                   href={item.href}
-                  className="text-xs font-semibold text-gray-600 hover:text-black hover:bg-gray-100 transition-colors px-3 py-1.5 rounded-lg flex items-center justify-between"
+                  className="text-xs font-semibold text-gray-600 hover:text-black transition-colors px-2.5 py-1.5 rounded-lg hover:bg-white/40 flex items-center justify-between whitespace-nowrap"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
                 >
                   {item.label}
-                  {item.hasDropdown && <ChevronDown size={12} />}
-                </a>
+                  {item.hasDropdown && <ChevronDown size={12} className="ml-1" />}
+                </motion.a>
               ))}
             </motion.div>
           )}
         </AnimatePresence>
 
         {/* CTA Button / Menu Icon */}
-        <motion.div layout className="flex items-center gap-2 flex-shrink-0">
+        <motion.div layout className="flex items-center gap-3 flex-shrink-0 ml-auto md:ml-4">
           {/* Desktop CTA Button */}
           <AnimatePresence mode="wait">
             {!isScrolled ? (
@@ -175,9 +180,8 @@ export default function Navbar() {
                 exit={{ opacity: 0, scale: 0.8, transition: { duration: 0.15 } }}
                 className="hidden md:flex items-center gap-4"
               >
-            
-                {/* Language Selector meniru referensi */}
-                <div className="flex items-center gap-1.5 text-sm font-medium text-gray-700 cursor-pointer hover:text-black border-l border-gray-200 pl-4">
+                {/* Language Selector */}
+                <div className="flex items-center gap-1.5 text-sm font-medium text-gray-700 cursor-pointer hover:text-black hover:bg-white/30 px-3 py-1.5 rounded-lg transition-colors">
                   English <ChevronDown size={14} />
                 </div>
               </motion.div>
@@ -187,7 +191,9 @@ export default function Navbar() {
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.8 }}
-                className="hidden md:flex p-2 bg-gray-100 rounded-full text-gray-700 hover:bg-gray-200 transition-colors"
+                className="hidden md:flex p-2 bg-white/20 hover:bg-white/40 rounded-full text-gray-700 transition-colors backdrop-blur-sm border border-white/20"
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.95 }}
               >
                 <Menu size={18} />
               </motion.button>
@@ -217,22 +223,21 @@ export default function Navbar() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: -10, scale: 0.95 }}
             transition={{ type: "spring", stiffness: 300, damping: 25 }}
-            className="absolute top-20 left-4 right-4 md:hidden bg-white rounded-2xl border border-gray-100 shadow-xl backdrop-blur-md pointer-events-auto overflow-hidden"
+            className="absolute top-20 left-4 right-4 md:hidden bg-white/60 backdrop-blur-2xl rounded-2xl border border-white/70 shadow-lg pointer-events-auto overflow-hidden"
           >
             <div className="flex flex-col p-4 gap-2">
               {menuItems.map((item) => (
                 <motion.a
                   key={item.label}
                   href={item.href}
-                  className="flex items-center justify-between px-4 py-3 text-gray-700 hover:bg-gray-50 rounded-xl transition-colors font-medium text-[15px]"
+                  className="flex items-center justify-between px-4 py-3 text-gray-700 hover:bg-white/40 rounded-xl transition-colors font-medium text-[15px]"
                   onClick={() => setMobileMenuOpen(false)}
-                  whileHover={{ x: 4 }}
+                  whileHover={{ x: 4, backgroundColor: "rgba(255, 255, 255, 0.5)" }}
                 >
                   {item.label}
                   {item.hasDropdown && <ChevronDown size={16} className="text-gray-400" />}
                 </motion.a>
               ))}
-
             </div>
           </motion.div>
         )}
