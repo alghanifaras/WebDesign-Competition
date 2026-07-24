@@ -72,6 +72,7 @@ export default function Navbar() {
               <a href="#" className="hover:text-blue-500 transition-colors flex items-center gap-1.5"><Home size={16}/> Beranda</a>
               <a href="#" className="hover:text-blue-500 transition-colors flex items-center gap-1.5"><Layers size={16}/> Fitur</a>
               <a href="#" className="hover:text-blue-500 transition-colors">Harga</a>
+              <a href="/berita" className="hover:text-blue-500 transition-colors">Berita</a>
             </motion.div>
           )}
         </AnimatePresence>
