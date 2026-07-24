@@ -59,7 +59,7 @@ export default async function HalamanBacaArtikel({ params }) {
   const paragraphs = article.konten.split('\n').filter(p => p.trim() !== '');
 
   return (
-    <div className="flex flex-col min-h-screen bg-slate-50 font-poppins dark:bg-slate-900 transition-colors duration-300">
+    <div className="flex flex-col min-h-screen bg-slate-50 font-poppins hover:-translate-y-1.5 hover:-translate-x-1.5 transition-all duration-300 ease-out">
       <Navbar />
 
       <main className="flex-1 w-full pt-32 pb-16 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto">
@@ -67,7 +67,7 @@ export default async function HalamanBacaArtikel({ params }) {
         {/* Tombol Kembali bergaya Neo-Brutalism */}
         <Link 
           href="/berita" 
-          className="inline-flex items-center gap-2 mb-8 px-4 py-2 bg-white dark:bg-slate-800 text-slate-900 dark:text-white font-bold rounded-lg border-2 border-slate-900 dark:border-slate-600 shadow-[3px_3px_0px_0px_rgba(15,23,42,1)] dark:shadow-[3px_3px_0px_0px_rgba(255,255,255,0.2)] hover:shadow-none hover:translate-x-[3px] hover:translate-y-[3px] transition-all"
+          className="inline-flex items-center gap-2 mb-8 px-4 py-2 bg-white text-slate-900 font-bold rounded-lg border-2 border-slate-900 shadow-[3px_3px_0px_0px_rgba(15,23,42,1)] hover:shadow-none hover:translate-x-[3px] hover:translate-y-[3px] transition-all"
         >
           <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
@@ -76,7 +76,7 @@ export default async function HalamanBacaArtikel({ params }) {
         </Link>
 
         {/* Kotak Utama Artikel */}
-        <article className="bg-white dark:bg-slate-900 rounded-2xl border-2 border-slate-900 dark:border-slate-700 overflow-hidden shadow-[8px_8px_0px_0px_rgba(15,23,42,1)] dark:shadow-[8px_8px_0px_0px_rgba(255,255,255,0.2)] p-6 md:p-10">
+        <article className="bg-white rounded-2xl border-2 border-slate-900 overflow-hidden shadow-[8px_8px_0px_0px_rgba(15,23,42,1)] p-6 md:p-10">
           
           {/* Badge Kategori */}
           <span className="inline-block mb-6 px-4 py-1.5 bg-amber-300 text-slate-900 rounded-lg text-sm font-bold tracking-wider uppercase border-2 border-slate-900 shadow-[2px_2px_0px_0px_rgba(15,23,42,1)]">
@@ -84,12 +84,12 @@ export default async function HalamanBacaArtikel({ params }) {
           </span>
 
           {/* Judul Artikel */}
-          <h1 className="text-3xl md:text-5xl font-extrabold text-slate-900 dark:text-white mb-6 leading-tight">
+          <h1 className="text-3xl md:text-5xl font-extrabold text-slate-900 mb-6 leading-tight">
             {article.judul}
           </h1>
           
           {/* Meta Info (Penulis & Tanggal) */}
-          <div className="flex flex-wrap items-center gap-4 text-slate-600 dark:text-slate-400 font-semibold text-sm mb-8 pb-8 border-b-2 border-slate-200 dark:border-slate-800">
+          <div className="flex flex-wrap items-center gap-4 text-slate-600 font-semibold text-sm mb-8 pb-8 border-b-2 border-slate-200">
             <div className="flex items-center gap-2">
               <div className="w-8 h-8 rounded-full bg-blue-100 border-2 border-slate-900 flex items-center justify-center text-xl">
                 👤
@@ -103,7 +103,7 @@ export default async function HalamanBacaArtikel({ params }) {
           </div>
 
           {/* Gambar Thumbnail */}
-          <div className="w-full h-64 md:h-[400px] mb-10 rounded-xl overflow-hidden border-2 border-slate-900 dark:border-slate-700 shadow-[4px_4px_0px_0px_rgba(15,23,42,1)] dark:shadow-[4px_4px_0px_0px_rgba(255,255,255,0.2)]">
+          <div className="w-full h-64 md:h-[400px] mb-10 rounded-xl overflow-hidden border-2 border-slate-900 shadow-[4px_4px_0px_0px_rgba(15,23,42,1)]">
             <img 
               src={article.thumbnail} 
               alt={article.judul}
@@ -112,7 +112,7 @@ export default async function HalamanBacaArtikel({ params }) {
           </div>
 
           {/* Konten Teks */}
-          <div className="prose prose-lg dark:prose-invert max-w-none text-slate-800 dark:text-slate-200 font-medium leading-relaxed">
+          <div className="prose prose-lg max-w-none text-slate-800 font-medium leading-relaxed">
             {paragraphs.map((p, index) => (
               <p key={index} className="mb-6">{p}</p>
             ))}
