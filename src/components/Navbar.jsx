@@ -53,6 +53,7 @@ export default function Navbar() {
     { label: "Home", hasDropdown: false, href: "#" },
     { label: "Traffic Maps", hasDropdown: false, href: "#" },
     { label: "Articles", hasDropdown: false, href: "#" },
+    { label: "Destination", hasDropdown: false, href: "/destination" },
     { label: "Contact", hasDropdown: false, href: "#" },
   ];
 
