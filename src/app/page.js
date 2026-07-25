@@ -1,4 +1,5 @@
 import AboutUs from "@/components/AboutUs";
+import ContactSection from "@/components/Contact";
 import Feature from "@/components/Feature";
 import HeroSection from "@/components/HeroSection";
 
@@ -12,6 +13,8 @@ export default function Home() {
       <AboutUs />
 
       <Feature />
+
+      <ContactSection />
     </main>
   );
 }

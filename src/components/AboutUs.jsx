@@ -17,54 +17,51 @@ const ecosystemData = [
 ];
 
 const SmartEcosystem = () => {
-  // Membagi ikon ke dalam 3 lintasan orbit
   const innerOrbitItems = ecosystemData.slice(0, 2);
   const middleOrbitItems = ecosystemData.slice(2, 5);
   const outerOrbitItems = ecosystemData.slice(5, 8);
 
   return (
     <section
-      // z-20 dan shadow besar ditambahkan di sini agar membayang ke section di bawahnya
-      className="relative flex w-full flex-col items-center justify-start pt-24 overflow-hidden bg-[#F6FAF5] border-b border-gray-200/80 shadow-[0_30px_60px_-15px_rgba(0,0,0,0.15)] z-20"
+      // PERBAIKAN: overflow-hidden dihapus dari sini agar shadow bisa "keluar" menimpa section di bawahnya
+      // z-30 ditambahkan agar posisinya dipastikan berada di atas section fitur (z-20)
+      className="relative flex w-full flex-col items-center justify-start pt-24 bg-[#F6FAF5] border-b border-gray-200/80 shadow-[0_30px_60px_-15px_rgba(0,0,0,0.15)] z-30"
       style={{ fontFamily: "'Poppins', sans-serif" }}
     >
-      {/* 
-        SMOOTH TOP FADE TRANSITION 
-        Gradasi putih transparan ini menghilangkan kesan patah/gap dengan section di atasnya 
-      */}
+      {/* Top Fade Transition (Menyatu dengan section atasnya) */}
       <div className="absolute top-0 left-0 right-0 h-40 bg-gradient-to-b from-white to-transparent pointer-events-none z-10"></div>
 
       {/* 
-        FLOATING BACKGROUND ICONS - Tema Green Technology (Hanya Aksen Abu-abu) 
+        Wrapper khusus untuk Background Icons agar tidak keluar batas section,
+        karena overflow-hidden di parent sudah kita hapus.
       */}
-      <div className="absolute inset-0 w-full h-full pointer-events-none overflow-hidden z-0 max-w-[1400px] mx-auto">
-        {/* Icon 1: Eco Leaf (Top Left) */}
-        <div className="absolute top-16 left-6 md:left-20 text-slate-300/40 transform -rotate-12 w-20 h-20 md:w-32 md:h-32">
-          <svg viewBox="0 0 24 24" fill="currentColor">
-            <path d="M17 2h-4c-4.418 0-8 3.582-8 8v4l-3 3 2 2 3-3h4c4.418 0 8-3.582 8-8V2z" />
-          </svg>
-        </div>
-
-        {/* Icon 2: Clean Water / Hydro (Middle Left) */}
-        <div className="absolute top-64 -left-4 md:left-12 text-slate-300/40 transform rotate-12 w-16 h-16 md:w-24 md:h-24">
-          <svg viewBox="0 0 24 24" fill="currentColor">
-            <path d="M12 21a7 7 0 0 0 7-7c0-3.5-5-10-7-11-2 1-7 7.5-7 11a7 7 0 0 0 7 7z" />
-          </svg>
-        </div>
-
-        {/* Icon 3: Solar Energy (Top Right) */}
-        <div className="absolute top-20 right-4 md:right-24 text-slate-300/40 transform rotate-12 w-16 h-16 md:w-28 md:h-28">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
-            <circle cx="12" cy="12" r="4" fill="currentColor" />
-            <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" />
-          </svg>
-        </div>
-
-        {/* Icon 4: Electric Energy / Bolt (Bottom Right) */}
-        <div className="absolute top-72 right-2 md:right-16 text-slate-300/40 transform -rotate-15 w-14 h-14 md:w-24 md:h-24">
-          <svg viewBox="0 0 24 24" fill="currentColor">
-            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
-          </svg>
+      <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
+        <div className="relative w-full h-full max-w-[1400px] mx-auto">
+          {/* Icon 1: Eco Leaf */}
+          <div className="absolute top-16 left-6 md:left-20 text-slate-300/40 transform -rotate-12 w-20 h-20 md:w-32 md:h-32">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path d="M17 2h-4c-4.418 0-8 3.582-8 8v4l-3 3 2 2 3-3h4c4.418 0 8-3.582 8-8V2z" />
+            </svg>
+          </div>
+          {/* Icon 2: Clean Water */}
+          <div className="absolute top-64 -left-4 md:left-12 text-slate-300/40 transform rotate-12 w-16 h-16 md:w-24 md:h-24">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 21a7 7 0 0 0 7-7c0-3.5-5-10-7-11-2 1-7 7.5-7 11a7 7 0 0 0 7 7z" />
+            </svg>
+          </div>
+          {/* Icon 3: Solar Energy */}
+          <div className="absolute top-20 right-4 md:right-24 text-slate-300/40 transform rotate-12 w-16 h-16 md:w-28 md:h-28">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+              <circle cx="12" cy="12" r="4" fill="currentColor" />
+              <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" />
+            </svg>
+          </div>
+          {/* Icon 4: Electric Energy */}
+          <div className="absolute top-72 right-2 md:right-16 text-slate-300/40 transform -rotate-15 w-14 h-14 md:w-24 md:h-24">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
+            </svg>
+          </div>
         </div>
       </div>
 
@@ -73,7 +70,6 @@ const SmartEcosystem = () => {
         <h2 className="text-5xl md:text-6xl lg:text-[4.5rem] font-semibold text-slate-950 tracking-tight leading-tight mb-6">
           One <span className="relative inline-block">
             Intelligent
-            {/* SVG Hand-drawn Underline Effect */}
             <svg 
               className="absolute -bottom-3 md:-bottom-4 left-0 w-full h-4 md:h-5 text-slate-900" 
               viewBox="0 0 100 20" 
@@ -97,7 +93,7 @@ const SmartEcosystem = () => {
       {/* MAIN VISUAL SECTION (GLOBE & ORBITS) */}
       <div className="relative flex h-[600px] md:h-[750px] w-full justify-center overflow-hidden mt-10">
         
-        {/* WATERMARK BACKGROUND TEXT (Di belakang Globe) */}
+        {/* WATERMARK BACKGROUND TEXT */}
         <div 
           className="absolute top-[10%] left-0 w-full text-center pointer-events-none select-none z-0"
           style={{ 
@@ -110,15 +106,13 @@ const SmartEcosystem = () => {
           </h1>
         </div>
 
-        {/* ANCHOR CONTAINER (Titik Pusat) */}
+        {/* ANCHOR CONTAINER */}
         <div className="absolute bottom-[-750px] flex h-[1500px] w-[1500px] items-center justify-center z-10">
           
-          {/* GLOBE */}
           <div className="absolute inset-0 m-auto flex h-[800px] w-[800px] items-center justify-center z-0">
             <Globe />
           </div>
 
-          {/* ORBIT DALAM */}
           <div className="absolute inset-0 m-auto flex items-center justify-center z-10 pointer-events-none">
             <OrbitingCircles iconSize={56} radius={450} speed={1}>
               {innerOrbitItems.map((item) => (
@@ -131,7 +125,6 @@ const SmartEcosystem = () => {
             </OrbitingCircles>
           </div>
 
-          {/* ORBIT TENGAH */}
           <div className="absolute inset-0 m-auto flex items-center justify-center z-10 pointer-events-none">
             <OrbitingCircles iconSize={56} radius={560} reverse speed={1.2}>
               {middleOrbitItems.map((item) => (
@@ -144,7 +137,6 @@ const SmartEcosystem = () => {
             </OrbitingCircles>
           </div>
 
-          {/* ORBIT LUAR */}
           <div className="absolute inset-0 m-auto flex items-center justify-center z-10 pointer-events-none">
             <OrbitingCircles iconSize={56} radius={670} speed={1.5}>
               {outerOrbitItems.map((item) => (
@@ -159,6 +151,13 @@ const SmartEcosystem = () => {
 
         </div>
       </div>
+
+      {/* 
+        BOTTOM FADE TRANSITION 
+        Memberikan efek pudar di ujung bawah globe sebelum terkena border dan shadow 
+      */}
+      <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-[#F6FAF5] to-transparent pointer-events-none z-20"></div>
+      
     </section>
   );
 };
