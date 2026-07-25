@@ -1,4 +1,5 @@
 import AboutUs from "@/components/AboutUs";
+import Feature from "@/components/Feature";
 import HeroSection from "@/components/HeroSection";
 
 
@@ -9,6 +10,8 @@ export default function Home() {
       <HeroSection />
 
       <AboutUs />
+
+      <Feature />
     </main>
   );
 }
