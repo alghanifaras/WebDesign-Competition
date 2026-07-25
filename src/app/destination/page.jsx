@@ -85,7 +85,7 @@ const items = [
         width: 600,
         height: 450, // Landscape standar (4:3)
     },
-    
+
     // --- 10 GAMBAR TERBARU ---
     {
         id: "11",
@@ -181,8 +181,8 @@ const MapView = dynamic(() => import("@/components/ui/map-view"), {
 
 export default function DestinationPage() {
     return (
-        <main className="p-6 mt-20 md:p-8 w-full max-w-[1400px] mx-auto space-y-12">
-            
+        <main className="flex-1 p-6 mt-20 mb-20 md:p-8 w-full max-w-[1400px] mx-auto space-y-12">
+
             {/* --- DESTINATION SECTION --- */}
             <section className="space-y-4">
                 <div>
@@ -213,8 +213,9 @@ export default function DestinationPage() {
                 <MapView />
             </section>
 
+         
             {/* --- GALLERY SECTION --- */}
-            <section className="space-y-4 pt-6">
+            <section className="space-y-4 pt-6 relative pb-12">
                 <div>
                     <h2 className="text-5xl md:text-6xl lg:text-[4.5rem] font-semibold text-slate-950 tracking-tight leading-tight">
                         <span className="relative inline-block">
@@ -238,6 +239,9 @@ export default function DestinationPage() {
                     blurToFocus
                     colorShiftOnHover={false}
                 />
+
+                {/* PERUBAHAN DI SINI: Tinggi diubah menjadi 400px dan menggunakan 'via' agar gradasi lebih rapat menyembunyikan gambar yang tidak rata */}
+                <div className="pointer-events-none absolute bottom-0 left-0 w-full h-[400px] bg-gradient-to-t from-white via-white/90 to-transparent" />
             </section>
 
         </main>

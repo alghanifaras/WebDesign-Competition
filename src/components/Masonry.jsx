@@ -98,14 +98,14 @@ const Masonry = ({
     preloadImages(items.map(i => i.img)).then(() => setImagesReady(true));
   }, [items]);
 
-  const grid = useMemo(() => {
-    if (!width) return [];
+  const { gridItems, containerHeight } = useMemo(() => {
+    if (!width) return { gridItems: [], containerHeight: 0 };
     const colHeights = new Array(columns).fill(0);
     const gap = 16;
     const totalGaps = (columns - 1) * gap;
     const columnWidth = (width - totalGaps) / columns;
 
-    return items.map(child => {
+    const mappedItems = items.map(child => {
       const col = colHeights.indexOf(Math.min(...colHeights));
       const x = col * (columnWidth + gap);
       const height = child.height / 2;
@@ -114,6 +114,11 @@ const Masonry = ({
       colHeights[col] += height + gap;
       return { ...child, x, y, w: columnWidth, h: height };
     });
+
+    return {
+      gridItems: mappedItems,
+      containerHeight: Math.max(...colHeights)
+    };
   }, [columns, items, width]);
 
   const hasMounted = useRef(false);
@@ -121,7 +126,7 @@ const Masonry = ({
   useLayoutEffect(() => {
     if (!imagesReady) return;
 
-    grid.forEach((item, index) => {
+    gridItems.forEach((item, index) => {
       const selector = `[data-key="${item.id}"]`;
       const animProps = { x: item.x, y: item.y, width: item.w, height: item.h };
 
@@ -154,7 +159,7 @@ const Masonry = ({
 
     hasMounted.current = true;
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [grid, imagesReady, stagger, animateFrom, blurToFocus, duration, ease]);
+  }, [gridItems, imagesReady, stagger, animateFrom, blurToFocus, duration, ease]);
 
   const handleMouseEnter = (id, element) => {
     if (scaleOnHover) {
@@ -185,8 +190,8 @@ const Masonry = ({
   };
 
   return (
-    <div ref={containerRef} className="relative w-full h-full">
-      {grid.map(item => (
+    <div ref={containerRef} className="relative w-full" style={{ height: containerHeight }}>
+      {gridItems.map(item => (
         <div
           key={item.id}
           data-key={item.id}
