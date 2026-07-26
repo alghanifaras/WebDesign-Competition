@@ -50,9 +50,10 @@ export default function Navbar() {
 
   // Menu items
   const menuItems = [
-    { label: "Home", hasDropdown: false, href: "#" },
+    { label: "Home", hasDropdown: false, href: "/" },
     { label: "Traffic Maps", hasDropdown: false, href: "#" },
     { label: "Articles", hasDropdown: false, href: "#" },
+    { label: "Destination", hasDropdown: false, href: "/destination" },
     { label: "Contact", hasDropdown: false, href: "#" },
   ];
 
