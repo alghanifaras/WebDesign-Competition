@@ -19,18 +19,18 @@ export default function NewsCard({ article }) {
         {/* Konten */}
         <div className="p-5 flex flex-col grow">
           {/* Kategori */}
-          <span className="text-xs font-medium text-gray-500 mb-2">
+          <span className="text-xs font-medium text-gray-500 mb-2" style={{ fontFamily: "'Poppins', sans-serif" }}>
             {article.kategori}
           </span>
 
           {/* Judul */}
-          <h2 className="text-lg font-bold text-gray-900 leading-snug line-clamp-2 mb-3 group-hover:text-gray-700 transition-colors">
+          <h2 className="text-lg font-bold text-gray-900 leading-snug line-clamp-2 mb-3 group-hover:text-gray-700 transition-colors" style={{ fontFamily: "'Poppins', sans-serif" }}>
             {article.judul}
           </h2>
 
           {/* Ringkasan (opsional, tampil jika ada & tidak butuh gaya identik dgn referensi) */}
           {article.ringkasan && (
-            <p className="text-sm text-gray-500 line-clamp-2 mb-4 leading-relaxed">
+            <p className="text-sm text-gray-500 line-clamp-2 mb-4 leading-relaxed" style={{ fontFamily: "'Poppins', sans-serif" }}>
               {article.ringkasan}
             </p>
           )}
