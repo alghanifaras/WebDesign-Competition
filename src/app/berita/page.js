@@ -88,7 +88,7 @@ export default function SmartCityHome() {
         <div
           className="absolute inset-0 bg-cover"
           style={{
-            backgroundImage: `url('/hero/hero2.png')`,
+            
             opacity: 0.6,
             backgroundPosition: "center 85%",
             backgroundSize: "cover",
@@ -114,7 +114,7 @@ export default function SmartCityHome() {
         <div
           className="absolute inset-0 bg-cover"
           style={{
-            backgroundImage: `url('/hero/hero2.png')`,
+            
             opacity: 0.8,
             backgroundPosition: "center 80%",
             backgroundSize: "cover",
@@ -127,7 +127,7 @@ export default function SmartCityHome() {
         <div
           className="absolute inset-0"
           style={{
-            backgroundImage: `url('/hero/hero.png')`,
+            
             backgroundSize: "cover",
             backgroundPosition: "center bottom",
             opacity: 0.95,
