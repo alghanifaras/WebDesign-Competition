@@ -52,6 +52,7 @@ export default function Navbar() {
   const menuItems = [
     { label: "Home", hasDropdown: false, href: "/" },
     { label: "Traffic Maps", hasDropdown: false, href: "#" },
+    { label: "Destinations", hasDropdown: false, href: "/destination" },
     { label: "Articles", hasDropdown: false, href: "/berita" },
     { label: "Contact", hasDropdown: false, href: "#" },
   ];
