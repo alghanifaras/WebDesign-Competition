@@ -158,7 +158,7 @@ const HeroSection = () => {
                 <path d="M5 12h14M12 5l7 7-7 7"/>
               </svg>
             </div>
-            <span>Get started</span>
+            <span>Explore Smart Ecosystem</span>
           </button>
 
           <button
