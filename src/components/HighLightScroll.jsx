@@ -4,11 +4,11 @@
 // TAMBAHAN: Import useEffect dan useState
 import { useRef, useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import Link from "next/link"; 
+import Link from "next/link";
 
 export default function HighlightScroll({ articles }) {
   const scrollContainerRef = useRef(null);
-  
+
   // TAMBAHAN: State untuk mengecek apakah kursor sedang berada di atas carousel
   const [isHovered, setIsHovered] = useState(false);
 
@@ -32,8 +32,10 @@ export default function HighlightScroll({ articles }) {
 
     const autoScrollInterval = setInterval(() => {
       if (scrollContainerRef.current) {
-        const { scrollLeft, scrollWidth, clientWidth } = scrollContainerRef.current;
-        const scrollAmount = scrollContainerRef.current.firstChild?.clientWidth || 800;
+        const { scrollLeft, scrollWidth, clientWidth } =
+          scrollContainerRef.current;
+        const scrollAmount =
+          scrollContainerRef.current.firstChild?.clientWidth || 800;
 
         // Cek apakah scroll sudah mencapai ujung paling kanan
         // (-10 digunakan sebagai toleransi pembulatan piksel)
@@ -74,8 +76,26 @@ export default function HighlightScroll({ articles }) {
               <span className="w-2 h-8 rounded-full shadow-lg" />
               <span className="w-2 h-6 rounded-full shadow-lg" />
             </div>
-            <h2 className="ml-[-22px] text-[60px] md:text-[80px] font-bold text-black bg-clip-text font-serif italic font-light tracking-normal leading-none">
+            {/* <h2 className="ml-[-22px] text-[60px] md:text-[80px] font-bold text-black bg-clip-text font-serif italic font-light tracking-normal leading-none">
               City News
+            </h2> */}
+            <h2 className="text-4xl md:text-5xl lg:text-[4rem] font-semibold text-slate-900 tracking-tight leading-[1.15] mb-6">
+              City{" "}
+              <span className="relative inline-block font-serif italic font-normal text-emerald-600">
+                News
+                {/* SVG Hand-drawn Underline Effect */}
+                <svg
+                  className="absolute -bottom-2 md:-bottom-3 left-0 w-full h-3 md:h-4 text-emerald-600/50"
+                  viewBox="0 0 100 20"
+                  preserveAspectRatio="none"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <path d="M2,12 Q45,2 98,10" strokeWidth="2.5" />
+                </svg>
+              </span>
             </h2>
           </motion.div>
         </div>
@@ -125,7 +145,7 @@ export default function HighlightScroll({ articles }) {
 
       {/* --- HORIZONTAL SCROLL HIGHLIGHTS --- */}
       {/* TAMBAHAN: onMouseEnter dan onMouseLeave untuk mengontrol isHovered */}
-      <div 
+      <div
         className="relative w-full"
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
@@ -136,7 +156,7 @@ export default function HighlightScroll({ articles }) {
         >
           {articles.map((item) => (
             <Link
-              href={`/berita/${item.slug}`} 
+              href={`/berita/${item.slug}`}
               key={`highlight-${item.id}`}
               className="block relative min-w-[90vw] md:min-w-[75vw] lg:min-w-[850px] h-[400px] md:h-[500px] rounded-[32px] overflow-hidden flex-shrink-0 snap-center group shadow-xl cursor-pointer"
             >
@@ -154,11 +174,11 @@ export default function HighlightScroll({ articles }) {
                 {/* Content Container */}
                 <div className="relative z-10 p-8 md:p-10 flex flex-col justify-end">
                   <h2
-                    className="text-3xl md:text-4xl font-bold text-white/90 mb-3 max-w-3xl leading-tight"
-                    style={{ fontFamily: "'Poppins', sans-serif" }}
-                  >
-                    {item.judul}
-                  </h2>
+                      className="text-3xl md:text-4xl font-bold text-white/90 mb-3 max-w-3xl leading-tight line-clamp-2"
+                      style={{ fontFamily: "'Poppins', sans-serif" }}
+                    >
+                      {item.judul}
+                    </h2>
 
                   {item.ringkasan && (
                     <p
@@ -175,7 +195,7 @@ export default function HighlightScroll({ articles }) {
                       <div className="flex items-center gap-2">
                         <div className="w-8 h-8 rounded-full bg-gray-500 overflow-hidden">
                           <img
-                            src="https://ui-avatars.com/api/?name=Admin&background=random"
+                            src="https://img.magnific.com/vektor-premium/ilustrasi-datar-vektor-dalam-skala-abu-abu-avatar-ikon-orang-profil-pengguna-gambar-profil-cocok-untuk-media-sosial-profil-ikon-screensaver-dan-sebagai-templatx9xa_719432-1256.jpg?semt=ais_hybrid&w=740&q=80"
                             alt="Author"
                           />
                         </div>

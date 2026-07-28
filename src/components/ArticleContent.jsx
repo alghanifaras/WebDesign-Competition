@@ -27,8 +27,11 @@ export default function ArticleContent({ article }) {
       {/* Meta Info (Penulis & Tanggal) */}
       <div className="flex flex-wrap items-center gap-4 text-slate-500 font-medium text-sm mb-8 pb-8 border-b border-white/50">
         <div className="flex items-center gap-2 bg-white/30 px-3 py-1.5 rounded-full border border-white/40">
-          <div className="w-7 h-7 rounded-full bg-gradient-to-tr from-teal-200 to-blue-200 flex items-center justify-center text-xs shadow-sm">
-            👤
+          <div className="w-8 h-8 rounded-full bg-gray-500 overflow-hidden">
+            <img
+              src="https://img.magnific.com/vektor-premium/ilustrasi-datar-vektor-dalam-skala-abu-abu-avatar-ikon-orang-profil-pengguna-gambar-profil-cocok-untuk-media-sosial-profil-ikon-screensaver-dan-sebagai-templatx9xa_719432-1256.jpg?semt=ais_hybrid&w=740&q=80"
+              alt="Author"
+            />
           </div>
           <span style={{ fontFamily: "'Poppins', sans-serif" }}>
             {article.penulis}
@@ -39,7 +42,20 @@ export default function ArticleContent({ article }) {
           className="flex items-center gap-2 bg-white/30 px-4 py-1.5 rounded-full border border-white/40"
           style={{ fontFamily: "'Poppins', sans-serif" }}
         >
-          📅 <time>{article.tanggal}</time>
+          <svg
+            className="w-4 h-4"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+            />
+          </svg>
+          <time>{article.tanggal}</time>
         </div>
       </div>
 
