@@ -32,7 +32,7 @@ export default function SmartCityHome() {
 
   return (
     <div 
-      className="flex flex-col min-h-screen selection:bg-[#2A4D3B] selection:text-white relative"
+      className="flex flex-col min-h-screen selection:bg-[#2A4D3B] selection:text-white relative overflow-x-hidden"
       style={{ fontFamily: "'Poppins', sans-serif" }}
     >
       <BackgroundLayers />
@@ -40,15 +40,16 @@ export default function SmartCityHome() {
       {/* --- Main Content --- */}
       <div className="relative z-10 flex flex-col min-h-screen">
         <main className="flex-1 w-full pt-32 pb-16">
-          <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          {/* Lebar disamakan dengan batasan maksimal Navbar agar proporsional */}
+          <section className="max-w-[1100px] mx-auto px-4 sm:px-6 lg:px-8">
             <motion.div
               initial={{ opacity: 0, y: 100 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, ease: "easeOut" }}
               className="relative"
             > 
-              {/* Decorative Background Blob */}
-              <div className="absolute -top-20 -right-20 w-64 h-64 rounded-full blur-3xl bg-[#1E573D] opacity-10 pointer-events-none" />
+              {/* Decorative Background Blob (Diposisikan aman agar tidak bikin scroll ke kanan) */}
+              <div className="absolute -top-20 right-0 w-64 h-64 rounded-full blur-3xl bg-[#1E573D] opacity-10 pointer-events-none" />
 
               <div className="relative z-10">
                 <HighlightScroll articles={highlightedBerita} />

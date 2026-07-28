@@ -5,7 +5,8 @@ import React from "react";
 const HeroSection = () => {
   return (
     <section
-      className="relative w-screen h-screen overflow-hidden"
+      // Menggunakan h-[100dvh] untuk menangani UI browser mobile dengan lebih baik
+      className="relative w-screen h-[100dvh] min-h-screen overflow-hidden"
       style={{
         fontFamily: "'Poppins', sans-serif"
       }}
@@ -56,7 +57,6 @@ const HeroSection = () => {
           opacity: 0.8,
           backgroundPosition: "center 80%",
           backgroundSize: "cover",
-          // Feathering (penghalusan) tepi gambar
           WebkitMaskImage: "linear-gradient(to bottom, transparent 10%, black 40%, black 90%, transparent 100%)",
           maskImage: "linear-gradient(to bottom, transparent 10%, black 40%, black 90%, transparent 100%)",
         }}
@@ -78,7 +78,7 @@ const HeroSection = () => {
 
       {/* Floating accent elements */}
       <div
-        className="absolute bottom-32 left-10 w-32 h-32 rounded-full pointer-events-none opacity-10"
+        className="absolute bottom-32 left-10 w-24 h-24 md:w-32 md:h-32 rounded-full pointer-events-none opacity-10"
         style={{
           zIndex: 16,
           background: "radial-gradient(circle, #2F855A 0%, transparent 70%)",
@@ -88,7 +88,7 @@ const HeroSection = () => {
       />
 
       <div
-        className="absolute top-1/4 right-20 w-40 h-40 rounded-full pointer-events-none opacity-5"
+        className="absolute top-1/4 right-10 md:right-20 w-28 h-28 md:w-40 md:h-40 rounded-full pointer-events-none opacity-5"
         style={{
           zIndex: 16,
           background: "radial-gradient(circle, #2F855A 0%, transparent 70%)",
@@ -99,12 +99,12 @@ const HeroSection = () => {
 
       {/* LAYER 3: Headline & Content */}
       <div 
-        className="absolute inset-0 flex flex-col items-center justify-center text-center px-6"
+        className="absolute inset-0 flex flex-col items-center justify-center text-center px-4 sm:px-6"
         style={{ zIndex: 20 }}
       >
         {/* Eyebrow Text */}
         <p 
-          className="text-xs md:text-sm font-bold tracking-[0.15em] uppercase mb-4"
+          className="text-[10px] sm:text-xs md:text-sm font-bold tracking-[0.15em] uppercase mb-3 md:mb-4"
           style={{ 
             color: "#1E573D",
             textShadow: "0 2px 10px rgba(255,255,255,0.8)",
@@ -114,9 +114,9 @@ const HeroSection = () => {
           For the citizens who refuse to compromise.
         </p>
 
-        {/* Headline */}
+        {/* Headline - Disesuaikan ukuran responsifnya */}
         <h1
-          className="text-6xl md:text-7xl lg:text-[6.5rem] font-medium leading-[1.1] mb-6 tracking-tight max-w-5xl"
+          className="text-5xl sm:text-6xl md:text-7xl lg:text-[6.5rem] font-medium leading-[1.1] mb-4 md:mb-6 tracking-tight max-w-5xl"
           style={{
             color: "#111827",
             textShadow: "0 0 60px rgba(255,255,255,0.9), 0 0 20px rgba(255,255,255,0.7), 0 2px 4px rgba(0,0,0,0.1)",
@@ -130,7 +130,7 @@ const HeroSection = () => {
         </h1>
 
         <p
-          className="text-lg md:text-xl font-medium mb-14 max-w-2xl leading-relaxed"
+          className="text-base sm:text-lg md:text-xl font-medium mb-8 md:mb-14 max-w-2xl leading-relaxed px-2"
           style={{
             color: "#111827",
             textShadow: "0 0 30px rgba(255,255,255,1), 0 1px 2px rgba(255,255,255,0.8)",
@@ -140,29 +140,29 @@ const HeroSection = () => {
           Connect citizens, transportation, environment, and public services through one intelligent digital ecosystem.
         </p>
 
-        {/* CTA Buttons */}
+        {/* CTA Buttons - Dirubah menjadi flex-col di mobile dan baris di layar lebih besar */}
         <div
-          className="flex items-center gap-5"
+          className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-5 w-full max-w-[280px] sm:max-w-none mx-auto"
           style={{ animation: "fadeInUp 0.8s ease-out 0.4s both" }}
         >
           <button
-            className="group flex items-center justify-between gap-4 px-2 py-2 pr-6 rounded-full font-semibold text-[15px] transition-all duration-300 hover:shadow-xl hover:scale-105"
+            className="group w-full sm:w-auto flex items-center justify-between sm:justify-start gap-3 sm:gap-4 px-2 py-2 pr-4 sm:pr-6 rounded-full font-semibold text-[14px] sm:text-[15px] transition-all duration-300 hover:shadow-xl hover:scale-105"
             style={{
               backgroundColor: "#ffffff",
               color: "#111827",
               boxShadow: "0 8px 30px rgba(0,0,0,0.08)",
             }}
           >
-            <div className="flex items-center justify-center w-9 h-9 rounded-full bg-[#111827] text-white transition-transform duration-300 group-hover:rotate-45">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+            <div className="flex items-center justify-center shrink-0 w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-[#111827] text-white transition-transform duration-300 group-hover:rotate-45">
+              <svg width="14" height="14" className="sm:w-4 sm:h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M5 12h14M12 5l7 7-7 7"/>
               </svg>
             </div>
-            <span>Explore Smart Ecosystem</span>
+            <span className="flex-1 text-center sm:text-left pr-2 sm:pr-0">Explore Smart Ecosystem</span>
           </button>
 
           <button
-            className="px-7 py-3.5 rounded-full font-semibold text-[15px] transition-all duration-300 hover:scale-105"
+            className="w-full sm:w-auto px-6 sm:px-7 py-3 sm:py-3.5 rounded-full font-semibold text-[14px] sm:text-[15px] transition-all duration-300 hover:scale-105"
             style={{
               background: "rgba(255, 255, 255, 0.35)",
               backdropFilter: "blur(12px)",
@@ -179,9 +179,8 @@ const HeroSection = () => {
       </div>
 
       {/* LAYER 6: TRANSISI PEMBATAS KE SECTION BERIKUTNYA */}
-      {/* Menggunakan gradient putih dari bawah ke atas agar memudar lembut menuju background section di bawahnya */}
       <div 
-        className="absolute bottom-0 left-0 w-full h-32 pointer-events-none" 
+        className="absolute bottom-0 left-0 w-full h-24 md:h-32 pointer-events-none" 
         style={{ 
           zIndex: 30,
           background: "linear-gradient(to top, #ffffff 0%, transparent 100%)"
