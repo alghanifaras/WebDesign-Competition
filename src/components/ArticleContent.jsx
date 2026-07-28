@@ -72,7 +72,7 @@ export default function ArticleContent({ article }) {
       {/* Konten Teks */}
       <div className="prose prose-lg max-w-none text-slate-700 font-normal leading-relaxed">
         {paragraphs.map((p, index) => (
-          <p key={index} className="mb-6 text-2xl">
+          <p key={index} className="mb-6 text-lg">
             {p}
           </p>
         ))}
