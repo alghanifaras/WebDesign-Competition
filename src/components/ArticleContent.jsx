@@ -1,82 +1,235 @@
-// components/ArticleContent.jsx
+// /app/components/ArticleContent.jsx
+// Minimal, Magic-UI-style article renderer. Supports headings (##, ###),
+// unordered lists, fenced code blocks (```lang), bold **text**, and paragraphs.
+
+import React from 'react';
+
+function renderInline(text, keyPrefix = '') {
+  // very small **bold** support
+  const parts = text.split(/(\*\*[^*]+\*\*)/g);
+  return parts.map((p, i) => {
+    if (/^\*\*[^*]+\*\*$/.test(p)) {
+      return (
+        <strong key={`${keyPrefix}-b-${i}`} className="font-semibold text-slate-900">
+          {p.slice(2, -2)}
+        </strong>
+      );
+    }
+    return <React.Fragment key={`${keyPrefix}-t-${i}`}>{p}</React.Fragment>;
+  });
+}
+
+function highlightCode(code, lang) {
+  // Extremely lightweight tokenizer just for visual flair (no external dep).
+  const keywords = /\b(import|from|export|default|function|const|let|var|return|if|else|for|while|new|class|extends|typeof|of|in|null|undefined|true|false)\b/g;
+  const strings = /("[^"]*"|'[^']*'|`[^`]*`)/g;
+  const tags = /(&lt;\/?[A-Za-z][A-Za-z0-9]*)/g;
+
+  let escaped = code
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;');
+
+  escaped = escaped.replace(strings, '<span class="text-rose-300">$1</span>');
+  escaped = escaped.replace(keywords, '<span class="text-fuchsia-300">$1</span>');
+  escaped = escaped.replace(tags, '<span class="text-sky-300">$1</span>');
+  return escaped;
+}
+
+function slugify(str) {
+  return str
+    .toLowerCase()
+    .replace(/[^a-z0-9\s-]/g, '')
+    .trim()
+    .replace(/\s+/g, '-');
+}
+
 export default function ArticleContent({ article }) {
-  // Pecah paragraf berdasarkan enter (\n) untuk merender HTML
-  const paragraphs = article.konten.split("\n").filter((p) => p.trim() !== "");
+  const raw = article?.konten || '';
+  const lines = raw.split('\n');
+
+  const blocks = [];
+  let i = 0;
+  while (i < lines.length) {
+    const line = lines[i];
+
+    // Fenced code block
+    if (line.startsWith('```')) {
+      const lang = line.slice(3).trim();
+      const codeLines = [];
+      i++;
+      while (i < lines.length && !lines[i].startsWith('```')) {
+        codeLines.push(lines[i]);
+        i++;
+      }
+      i++; // skip closing ```
+      blocks.push({ type: 'code', lang, content: codeLines.join('\n') });
+      continue;
+    }
+
+    // Headings
+    if (line.startsWith('### ')) {
+      blocks.push({ type: 'h3', content: line.slice(4).trim() });
+      i++;
+      continue;
+    }
+    if (line.startsWith('## ')) {
+      blocks.push({ type: 'h2', content: line.slice(3).trim() });
+      i++;
+      continue;
+    }
+
+    // Bullet list
+    if (/^\s*-\s+/.test(line)) {
+      const items = [];
+      while (i < lines.length && /^\s*-\s+/.test(lines[i])) {
+        items.push(lines[i].replace(/^\s*-\s+/, ''));
+        i++;
+      }
+      blocks.push({ type: 'ul', items });
+      continue;
+    }
+
+    // Ordered list
+    if (/^\s*\d+\.\s+/.test(line)) {
+      const items = [];
+      while (i < lines.length && /^\s*\d+\.\s+/.test(lines[i])) {
+        items.push(lines[i].replace(/^\s*\d+\.\s+/, ''));
+        i++;
+      }
+      blocks.push({ type: 'ol', items });
+      continue;
+    }
+
+    // Blank line
+    if (line.trim() === '') {
+      i++;
+      continue;
+    }
+
+    // Paragraph (accumulate consecutive text lines)
+    const paraLines = [line];
+    i++;
+    while (
+      i < lines.length &&
+      lines[i].trim() !== '' &&
+      !lines[i].startsWith('#') &&
+      !lines[i].startsWith('```') &&
+      !/^\s*-\s+/.test(lines[i]) &&
+      !/^\s*\d+\.\s+/.test(lines[i])
+    ) {
+      paraLines.push(lines[i]);
+      i++;
+    }
+    blocks.push({ type: 'p', content: paraLines.join(' ') });
+  }
 
   return (
-    <article className="relative bg-white/40 backdrop-blur-xl border border-white/50 rounded-3xl overflow-hidden shadow-[0_8px_32px_rgba(0,0,0,0.08)] p-6 md:p-12 mb-12">
-      {/* Subtle Glass Reflection Atas */}
-      <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/80 to-transparent" />
-
-      {/* Badge Kategori */}
-      <span
-        style={{ fontFamily: "'Poppins', sans-serif" }}
-        className="inline-block mb-6 px-5 py-2 bg-white/60 backdrop-blur-md text-slate-700 rounded-full text-sm font-semibold tracking-wide border border-white/50 shadow-sm"
-      >
-        {article.kategori}
-      </span>
-
-      {/* Judul Artikel */}
-      <h1
-        style={{ fontFamily: "'Poppins', sans-serif" }}
-        className="text-3xl md:text-5xl font-bold text-slate-800 mb-6 leading-tight"
-      >
-        {article.judul}
-      </h1>
-
-      {/* Meta Info (Penulis & Tanggal) */}
-      <div className="flex flex-wrap items-center gap-4 text-slate-500 font-medium text-sm mb-8 pb-8 border-b border-white/50">
-        <div className="flex items-center gap-2 bg-white/30 px-3 py-1.5 rounded-full border border-white/40">
-          <div className="w-8 h-8 rounded-full bg-gray-500 overflow-hidden">
-            <img
-              src="https://img.magnific.com/vektor-premium/ilustrasi-datar-vektor-dalam-skala-abu-abu-avatar-ikon-orang-profil-pengguna-gambar-profil-cocok-untuk-media-sosial-profil-ikon-screensaver-dan-sebagai-templatx9xa_719432-1256.jpg?semt=ais_hybrid&w=740&q=80"
-              alt="Author"
-            />
-          </div>
-          <span style={{ fontFamily: "'Poppins', sans-serif" }}>
-            {article.penulis}
-          </span>
+    <article className="text-slate-700">
+      {/* Hero image */}
+      {article?.thumbnail && (
+        <div className="mb-10 overflow-hidden rounded-xl border border-slate-200/70 bg-slate-100">
+          <img
+            src={article.thumbnail}
+            alt={article?.judul || 'article'}
+            className="w-full h-auto max-h-[420px] object-cover"
+          />
         </div>
-        <span className="hidden md:inline-block text-slate-300">•</span>
-        <div
-          className="flex items-center gap-2 bg-white/30 px-4 py-1.5 rounded-full border border-white/40"
-          style={{ fontFamily: "'Poppins', sans-serif" }}
-        >
-          <svg
-            className="w-4 h-4"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
-            />
-          </svg>
-          <time>{article.tanggal}</time>
-        </div>
-      </div>
+      )}
 
-      {/* Gambar Thumbnail dengan Efek Kaca */}
-      <div className="w-full h-64 md:h-[450px] mb-12 rounded-2xl overflow-hidden border border-white/60 shadow-[0_8px_20px_rgba(0,0,0,0.1)] relative group">
-        <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent z-10 pointer-events-none" />
-        <img
-          src={article.thumbnail}
-          alt={article.judul}
-          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-        />
-      </div>
-
-      {/* Konten Teks */}
-      <div className="prose prose-lg max-w-none text-slate-700 font-normal leading-relaxed">
-        {paragraphs.map((p, index) => (
-          <p key={index} className="mb-6 text-lg">
-            {p}
-          </p>
-        ))}
+      <div className="space-y-5 text-[15px] leading-[1.75] text-slate-700">
+        {blocks.map((b, idx) => {
+          if (b.type === 'h2') {
+            return (
+              <h2
+                id={slugify(b.content)}
+                key={idx}
+                className="scroll-mt-24 text-[22px] sm:text-[24px] font-semibold text-slate-900 tracking-tight pt-6"
+              >
+                {b.content}
+              </h2>
+            );
+          }
+          if (b.type === 'h3') {
+            return (
+              <h3
+                id={slugify(b.content)}
+                key={idx}
+                className="scroll-mt-24 text-[18px] sm:text-[19px] font-semibold text-slate-900 tracking-tight pt-4"
+              >
+                {b.content}
+              </h3>
+            );
+          }
+          if (b.type === 'p') {
+            return (
+              <p key={idx} className="text-slate-600">
+                {renderInline(b.content, `p-${idx}`)}
+              </p>
+            );
+          }
+          if (b.type === 'ul') {
+            return (
+              <ul key={idx} className="list-disc pl-6 space-y-2 text-slate-600 marker:text-slate-400">
+                {b.items.map((it, j) => (
+                  <li key={j}>{renderInline(it, `ul-${idx}-${j}`)}</li>
+                ))}
+              </ul>
+            );
+          }
+          if (b.type === 'ol') {
+            return (
+              <ol key={idx} className="list-decimal pl-6 space-y-2 text-slate-600 marker:text-slate-400">
+                {b.items.map((it, j) => (
+                  <li key={j}>{renderInline(it, `ol-${idx}-${j}`)}</li>
+                ))}
+              </ol>
+            );
+          }
+          if (b.type === 'code') {
+            const html = highlightCode(b.content, b.lang);
+            return (
+              <div key={idx} className="relative my-4">
+                <pre className="overflow-x-auto rounded-xl bg-slate-900 text-slate-100 text-[13px] leading-relaxed p-4 border border-slate-800">
+                  <code
+                    className="font-mono"
+                    dangerouslySetInnerHTML={{ __html: html }}
+                  />
+                </pre>
+                <button
+                  type="button"
+                  aria-label="copy code"
+                  className="absolute top-2 right-2 p-1.5 rounded-md bg-slate-800/70 hover:bg-slate-700 text-slate-300 text-[10px]"
+                >
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                </button>
+              </div>
+            );
+          }
+          return null;
+        })}
       </div>
     </article>
   );
+}
+
+export function extractHeadings(konten = '') {
+  const lines = konten.split('\n');
+  const headings = [];
+  let inCode = false;
+  for (const line of lines) {
+    if (line.startsWith('```')) {
+      inCode = !inCode;
+      continue;
+    }
+    if (inCode) continue;
+    if (line.startsWith('## ')) {
+      const text = line.slice(3).trim();
+      headings.push({ level: 2, text, id: slugify(text) });
+    } else if (line.startsWith('### ')) {
+      const text = line.slice(4).trim();
+      headings.push({ level: 3, text, id: slugify(text) });
+    }
+  }
+  return headings;
 }

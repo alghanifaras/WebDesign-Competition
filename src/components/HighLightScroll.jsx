@@ -63,42 +63,8 @@ export default function HighlightScroll({ articles }) {
 
   return (
     <div className="mb-16">
-      {/* --- HEADER HIGHLIGHT SECTION --- */}
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
-        <div className="space-y-2">
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5 }}
-            className="flex items-center"
-          >
-            <div className="flex items-center gap-2">
-              <span className="w-2 h-8 rounded-full shadow-lg" />
-              <span className="w-2 h-6 rounded-full shadow-lg" />
-            </div>
-            {/* <h2 className="ml-[-22px] text-[60px] md:text-[80px] font-bold text-black bg-clip-text font-serif italic font-light tracking-normal leading-none">
-              City News
-            </h2> */}
-            <h2 className="text-4xl md:text-5xl lg:text-[4rem] font-semibold text-slate-900 tracking-tight leading-[1.15] mb-6">
-              City{" "}
-              <span className="relative inline-block font-serif italic font-normal text-emerald-600">
-                News
-                {/* SVG Hand-drawn Underline Effect */}
-                <svg
-                  className="absolute -bottom-2 md:-bottom-3 left-0 w-full h-3 md:h-4 text-emerald-600/50"
-                  viewBox="0 0 100 20"
-                  preserveAspectRatio="none"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <path d="M2,12 Q45,2 98,10" strokeWidth="2.5" />
-                </svg>
-              </span>
-            </h2>
-          </motion.div>
-        </div>
+        
 
         {/* --- TOMBOL NAVIGASI KIRI & KANAN --- */}
         <div className="flex items-center gap-3">
@@ -174,11 +140,11 @@ export default function HighlightScroll({ articles }) {
                 {/* Content Container */}
                 <div className="relative z-10 p-8 md:p-10 flex flex-col justify-end">
                   <h2
-                      className="text-3xl md:text-4xl font-bold text-white/90 mb-3 max-w-3xl leading-tight line-clamp-2"
-                      style={{ fontFamily: "'Poppins', sans-serif" }}
-                    >
-                      {item.judul}
-                    </h2>
+                    className="text-3xl md:text-4xl font-bold text-white/90 mb-3 max-w-3xl leading-tight line-clamp-2"
+                    style={{ fontFamily: "'Poppins', sans-serif" }}
+                  >
+                    {item.judul}
+                  </h2>
 
                   {item.ringkasan && (
                     <p
