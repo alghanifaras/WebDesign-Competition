@@ -3,6 +3,7 @@
 import Masonry from "@/components/Masonry";
 import dynamic from "next/dynamic";
 import React from "react";
+import DestinationCards from "@/components/ui/DestinationCards";
 
 const items = [
     // --- LANSKAP & PANORAMA ---
@@ -182,14 +183,14 @@ const MapView = dynamic(() => import("@/components/ui/map-view"), {
 
 export default function DestinationPage() {
     return (
-        <main 
+        <main
             className="flex-1 w-full bg-[#FAFAFA] overflow-hidden"
             style={{ fontFamily: "'Poppins', sans-serif" }}
         >
-            
+
             {/* --- DESTINATION SECTION --- */}
             <section className="relative w-full pt-28 pb-20 px-6 md:px-8 max-w-[1200px] mx-auto flex flex-col items-center">
-                
+
                 {/* Header Text - Center Aligned */}
                 <div className="text-center z-20 mb-12">
                     <h3 className="text-[10px] md:text-xs font-bold tracking-[0.2em] text-slate-400 uppercase mb-4">
@@ -225,13 +226,14 @@ export default function DestinationPage() {
                 </div>
             </section>
 
-         
+            <DestinationCards />
+
             {/* --- GALLERY SECTION --- */}
             <section className="relative w-full py-20 px-4 md:px-8 max-w-[1400px] mx-auto flex flex-col items-center">
-                
+
                 {/* Header Text - Center Aligned */}
                 <div className="text-center z-20 mb-14">
-                     <h3 className="text-[10px] md:text-xs font-bold tracking-[0.2em] text-slate-400 uppercase mb-4">
+                    <h3 className="text-[10px] md:text-xs font-bold tracking-[0.2em] text-slate-400 uppercase mb-4">
                         Visual Collections
                     </h3>
                     <h2 className="text-4xl md:text-5xl lg:text-[4rem] font-semibold text-slate-900 tracking-tight leading-[1.15] mb-6">
