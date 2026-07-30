@@ -1,8 +1,8 @@
 // src/lib/dummyData.js
 
 export const categories = [
-  "Olahraga",
   "Semua",
+  "Olahraga",
   "Hukum",
   "Otomotif",
   "Politik",

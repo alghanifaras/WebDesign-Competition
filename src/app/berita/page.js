@@ -18,7 +18,6 @@ export default function SmartCityHome() {
   const [currentPage, setCurrentPage] = useState(1);
   const ITEMS_PER_PAGE = 6;
 
-  // Reset ke halaman 1 setiap kali user melakukan pencarian atau mengubah kategori
   useEffect(() => {
     setCurrentPage(1);
   }, [searchQuery, selectedCategory]);
@@ -66,11 +65,10 @@ export default function SmartCityHome() {
         />
       </div>
 
-      {/* HEADER SECTION - Diubah menjadi rata kiri dan sejajar dengan max-w-[1100px] */}
       <div className="pt-32 pb-12 border-b border-gray-100 flex flex-col min-h-[250px] justify-center relative z-10">
-        <div className="max-w-[1100px] mx-auto px-4 sm:px-6 lg:px-8 w-full flex flex-col items-start text-left">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 w-full flex flex-col items-start text-left">
           <div className="flex flex-col gap-3 items-start">
-            <h1 className="font-bold text-4xl md:text-5xl lg:text-[3.5rem] tracking-tight text-slate-900 leading-[1.1]">
+            <h1 className="font-bold text-5xl md:text-5xl lg:text-[3.5rem] tracking-tight text-slate-900 leading-[1.1]">
               SmartCity News
             </h1>
             <p className="text-slate-500 text-sm md:text-base lg:text-lg max-w-2xl mt-1">
@@ -80,7 +78,6 @@ export default function SmartCityHome() {
         </div>
       </div>
 
-      {/* --- Main Content --- */}
       <div className="relative z-10 flex flex-col min-h-screen">
         <main className="flex-1 w-full pt-12 pb-24">
           <section className="max-w-[1100px] mx-auto px-4 sm:px-6 lg:px-8">
@@ -113,7 +110,6 @@ export default function SmartCityHome() {
 
                 {totalPages > 1 && (
                   <div className="mt-14 flex items-center justify-center gap-2 sm:gap-3">
-                    {/* Prev Button */}
                     <button
                       onClick={() => goToPage(currentPage - 1)}
                       disabled={currentPage === 1}
@@ -143,7 +139,6 @@ export default function SmartCityHome() {
                       })}
                     </div>
 
-                    {/* Next Button */}
                     <button
                       onClick={() => goToPage(currentPage + 1)}
                       disabled={currentPage === totalPages}
