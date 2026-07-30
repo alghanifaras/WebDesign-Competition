@@ -1,36 +1,113 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+<div align="center">
 
-## Getting Started
+# 🌐 WebDesign-Competition
 
-First, run the development server:
+Sebuah template/portofolio web interaktif berbasis **Next.js (App Router)** yang menampilkan halaman berita, galeri, dan komponen UI modular. Cocok digunakan sebagai *landing page*, portofolio, atau demo untuk kompetisi desain web.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+[Fitur](#-fitur-utama) • [Teknologi](#️-teknologi-yang-digunakan) • [Struktur Proyek](#-struktur-proyek) • [Instalasi](#-cara-menjalankan) • [Skrip](#-skrip-yang-tersedia)
+
+</div>
+
+---
+
+## 🚀 Fitur Utama
+
+- **Halaman Berita & Artikel:** Dilengkapi dengan fitur filter, grid, sidebar, dan rekomendasi berita (`/berita`).
+- **Destinasi & Laporan:** Halaman khusus untuk menampilkan destinasi (`/destination`), laporan (`/report`), serta lalu lintas data (`/traffic`).
+- **Desain Interaktif & Modern:** Didukung oleh animasi halus menggunakan **Framer Motion** dan **GSAP**.
+- **Komponen UI Modular:** Dibangun dengan pendekatan komponen yang dapat digunakan kembali (*reusable components*).
+- **Dukungan Peta Opsional:** Integrasi dengan `maplibre-gl` untuk kebutuhan pemetaan.
+
+---
+
+## 🛠️ Teknologi yang Digunakan
+
+Proyek ini dibangun menggunakan teknologi modern:
+
+- **Framework:** [Next.js 16 (App Router)](https://nextjs.org/)
+- **Library Utama:** [React 19](https://react.dev/)
+- **Styling:** [Tailwind CSS v4](https://tailwindcss.com/) + PostCSS
+- **Animasi:** `framer-motion`, `gsap`, `motion`, `tw-animate-css`
+- **Peta:** `maplibre-gl` & `cobe`
+- **Komponen UI & Ikon:** `@base-ui/react`, `shadcn`, `lucide-react`, `@radix-ui/react-icons`
+- **Utilitas:** `clsx`, `tailwind-merge`, `class-variance-authority`, `next-themes`
+
+---
+
+## 📂 Struktur Proyek
+
+Berikut adalah ringkasan struktur direktori utama dari repositori ini:
+
+```text
+.
+├── public/                 # Aset publik (gambar, SVG, galeri, dll.)
+│   ├── assets/...
+│   └── gallery/...
+└── src/
+    ├── app/                # App Router (Routes & Entry Points)
+    │   ├── layout.js       # Layout global aplikasi
+    │   ├── page.js         # Halaman utama (Landing Page)
+    │   ├── globals.css     # Styling global & konfigurasi Tailwind
+    │   ├── berita/         # Route halaman berita
+    │   ├── destination/    # Route halaman destinasi
+    │   ├── report/         # Route halaman laporan
+    │   └── traffic/        # Route halaman lalu lintas
+    ├── components/         # Komponen UI modular
+    │   ├── ui/...          # Komponen primitif / utilitas UI
+    │   ├── Navbar.jsx
+    │   ├── Footer.jsx
+    │   ├── HeroSection.jsx
+    │   ├── AboutUs.jsx
+    │   ├── Contact.jsx
+    │   └── ... (komponen lainnya)
+    └── lib/
+        ├── dummyData.js    # Data mock / contoh konten
+        └── utils.js        # Fungsi utilitas pembantu
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## ⚙️ Skrip yang Tersedia
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Di dalam `package.json`, terdapat beberapa skrip yang dapat Anda gunakan:
 
-## Learn More
+| Perintah | Deskripsi |
+| :--- | :--- |
+| `npm run dev` | Menjalankan *development server* Next.js |
+| `npm run build` | Melakukan *build* aplikasi untuk mode produksi |
+| `npm run start` | Menjalankan server produksi (setelah proses *build* selesai) |
+| `npm run lint` | Menjalankan ESLint untuk memeriksa kesalahan penulisan kode |
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 📦 Cara Menjalankan
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Ikuti langkah-langkah di bawah ini untuk menjalankan proyek secara lokal dari *fresh clone*:
 
-## Deploy on Vercel
+1. **Clone repositori ini:**
+   ```bash
+   git clone https://github.com/alghanifaras/WebDesign-Competition.git
+   ```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+2. **Masuk ke direktori proyek:**
+   ```bash
+   cd WebDesign-Competition
+   ```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+3. **Install semua *dependencies*:**
+   ```bash
+   npm install
+   ```
+
+4. **Jalankan *development server*:**
+   ```bash
+   npm run dev
+   ```
+
+5. Buka [http://localhost:3000](http://localhost:3000) melalui peramban (browser) pilihan Anda untuk melihat hasil aplikasinya.
+
+---
+
+## 📄 Lisensi
+
+Proyek ini bersifat open-source dan bebas digunakan untuk keperluan pembelajaran, portofolio, maupun kompetisi desain web.
