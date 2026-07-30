@@ -85,7 +85,7 @@ export default function Navbar() {
     { label: "Traffic Maps", hasDropdown: false, href: "/traffic" },
     { label: "Destinations", hasDropdown: false, href: "/destination" },
     { label: "News", hasDropdown: false, href: "/berita" },
-    { label: "Contact", hasDropdown: false, href: "#" },
+    { label: "Report", hasDropdown: false, href: "/report" },
   ];
 
   return (
