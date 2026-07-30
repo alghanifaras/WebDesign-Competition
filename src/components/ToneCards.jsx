@@ -2,17 +2,6 @@
 
 import React, { useEffect, useRef } from "react";
 
-/**
- * ToneCardPopup
- * Props:
- *  - ecosystem: { id, icon, title, desc, theme: { bg, blob1, blob2, blob3, icon } }
- *  - onClose: () => void
- *
- * Behavior:
- *  - Uses ecosystem.theme classes for card bg and blob colors.
- *  - Mobile: bottom sheet; Desktop (md+): centered modal card like reference.
- */
-
 const Icons = {
   smartHome: (props) => (
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" {...props}>
@@ -69,7 +58,7 @@ const Icons = {
   )
 };
 
-const ToneCardPopup = ({ ecosystem, onClose = () => {} }) => {
+const ToneCardPopup = ({ ecosystem, onClose = () => { } }) => {
   const ref = useRef(null);
 
   useEffect(() => {
@@ -87,39 +76,45 @@ const ToneCardPopup = ({ ecosystem, onClose = () => {} }) => {
 
   if (!ecosystem) return null;
 
-  const toBg = (cls = "") => cls.replace(/^text-/, "bg-");
-
   const theme = ecosystem.theme || {};
   const Icon = Icons[ecosystem.icon] || (() => null);
 
   return (
-    <div className="fixed inset-0 z-[100] flex items-end md:items-center justify-center p-4 md:p-6" style={{ fontFamily: "'Poppins', sans-serif" }}>
-      {/* Backdrop */}
+    <div className="fixed inset-0 z-[100] flex items-end md:items-center justify-center p-0 md:p-6" style={{ fontFamily: "'Poppins', sans-serif" }}>
       <div
-        className="absolute inset-0 bg-slate-900/20 backdrop-blur-sm"
+        className="absolute inset-0 bg-slate-900/40 backdrop-blur-md transition-opacity duration-300"
         onClick={onClose}
         aria-hidden="true"
       />
 
-      {/* Centered card (desktop) + bottom-sheet (mobile) */}
       <div
         ref={ref}
         role="dialog"
         aria-modal="true"
         aria-label={`${ecosystem.title} details`}
         tabIndex={-1}
-        className="relative w-full max-w-md pointer-events-auto transform transition-all duration-220 outline-none"
+        className="relative w-full max-w-md pointer-events-auto transform transition-all duration-300 ease-out outline-none translate-y-0 animate-in fade-in zoom-in-95"
       >
-        {/* Colored soft shadow / glow under card */}
-        <div className={`hidden md:block absolute -inset-x-2 -bottom-6 h-24 rounded-[40px] ${toBg(theme.blob2 || "text-emerald-200")} opacity-30 filter blur-3xl`} aria-hidden="true" />
+        <div className={`hidden md:block absolute -inset-x-2 -bottom-6 h-24 rounded-[40px] ${theme.blob2 ? theme.blob2.replace(/^text-/, "bg-") : "bg-emerald-200"} opacity-30 filter blur-3xl`} aria-hidden="true" />
 
-        {/* Desktop modal */}
-        <div className={`hidden md:block relative ${theme.bg || "bg-emerald-50"} rounded-[40px] p-10 text-center shadow-[0_30px_60px_-15px_rgba(0,0,0,0.12)]`} style={{ minWidth: 360 }}>
-          {/* title */}
-          <h3 className="text-base font-semibold text-slate-800 mb-6">{ecosystem.title}</h3>
+        <div className={`relative ${theme.bg || "bg-emerald-50"} rounded-t-[32px] md:rounded-[40px] p-6 sm:p-8 md:p-10 text-center shadow-[0_30px_60px_-15px_rgba(0,0,0,0.15)] border border-white/60`} style={{ minWidth: 320 }}>
 
-          {/* blob stack */}
-          <div className="relative w-40 h-40 mx-auto mb-6 flex items-center justify-center">
+          <button
+            onClick={onClose}
+            className="absolute top-5 right-5 w-8 h-8 rounded-full bg-black/5 hover:bg-black/10 flex items-center justify-center text-slate-600 transition-colors cursor-pointer"
+            aria-label="Close dialog"
+          >
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
+
+          {/* Title */}
+          <h3 className="text-lg md:text-xl font-bold text-slate-900 mb-6 pr-6 pl-6">{ecosystem.title}</h3>
+
+          {/* Blob Stack Illustration */}
+          <div className="relative w-36 h-36 md:w-40 md:h-40 mx-auto mb-6 flex items-center justify-center">
             <svg className={`absolute inset-0 w-full h-full ${theme.blob1 || "text-emerald-200"} opacity-60 transform rotate-12`} viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
               <path fill="currentColor" transform="translate(100 100) scale(1.15)" d="M44.7,-76.4C58.8,-69.2,71.8,-59.1,79.6,-45.8C87.4,-32.6,90,-16.3,88.5,-0.8C86.9,14.6,81.1,29.3,71.7,40.9C62.3,52.5,49.2,61,35,68.5C20.8,76,5.4,82.5,-9.3,81.9C-24,81.3,-38,73.6,-50.2,63.7C-62.4,53.8,-72.8,41.7,-79.3,27.3C-85.8,12.9,-88.4,-3.8,-84.3,-18.9C-80.2,-34,-69.4,-47.5,-56.3,-56C-43.2,-64.5,-27.7,-68,-12.8,-70.6C2.1,-73.2,16.9,-74.9,30.5,-75.4C44.1,-75.9,56.6,-75.1,44.7,-76.4Z" />
             </svg>
@@ -130,45 +125,23 @@ const ToneCardPopup = ({ ecosystem, onClose = () => {} }) => {
               <path fill="currentColor" transform="translate(100 100) scale(0.75)" d="M39.6,-66C52.1,-58.5,63.7,-49.5,72.3,-37.7C80.9,-25.9,86.5,-11.3,86.1,3.1C85.7,17.5,79.3,31.7,70.2,43.4C61.1,55.1,49.3,64.3,36,70.3C22.7,76.3,7.9,79.1,-6.6,80.1C-21.1,81.1,-35.2,80.2,-47.4,73.3C-59.6,66.4,-69.9,53.5,-75.6,39.2C-81.3,24.9,-82.4,9.2,-78.9,-5.1C-75.4,-19.4,-67.3,-32.3,-56.9,-43.1C-46.5,-53.9,-33.8,-62.6,-20.5,-68C-7.2,-73.4,6.7,-75.5,20.4,-74.4C34.1,-73.3,47.6,-69,39.6,-66Z" />
             </svg>
 
-            {/* thin icon - di-center-kan secara absolut agar presisi di tengah blob */}
             <div className={`absolute inset-0 m-auto z-10 ${theme.icon || "text-emerald-700"} w-12 h-12 flex items-center justify-center`}>
               <Icon className="w-8 h-8 stroke-[1.5px]" />
             </div>
           </div>
 
-          {/* description */}
-          <p className="text-sm text-slate-600 max-w-[300px] mx-auto leading-relaxed">{ecosystem.desc}</p>
-        </div>
+          {/* Description */}
+          <p className="text-sm md:text-base text-slate-600 max-w-[320px] mx-auto leading-relaxed mb-8">{ecosystem.desc}</p>
 
-        {/* Mobile bottom-sheet */}
-        <div className="md:hidden">
-          <div className={`relative bg-white rounded-t-3xl p-6 shadow-[0_-10px_30px_-12px_rgba(2,6,23,0.12)] text-center`}>
-            <h3 className="text-base font-semibold text-slate-800 mb-5">{ecosystem.title}</h3>
-
-            {/* blob stack untuk mobile di-center-kan */}
-            <div className="relative w-32 h-32 mx-auto mb-5 flex items-center justify-center">
-              <svg className={`absolute inset-0 w-full h-full ${theme.blob1 || "text-emerald-200"} opacity-60 transform -rotate-6`} viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-                <path fill="currentColor" transform="translate(100 100) scale(1.05)" d="M44.7,-76.4C58.8,-69.2,71.8,-59.1,79.6,-45.8C87.4,-32.6,90,-16.3,88.5,-0.8C86.9,14.6,81.1,29.3,71.7,40.9C62.3,52.5,49.2,61,35,68.5C20.8,76,5.4,82.5,-9.3,81.9C-24,81.3,-38,73.6,-50.2,63.7C-62.4,53.8,-72.8,41.7,-79.3,27.3C-85.8,12.9,-88.4,-3.8,-84.3,-18.9C-80.2,-34,-69.4,-47.5,-56.3,-56C-43.2,-64.5,-27.7,-68,-12.8,-70.6C2.1,-73.2,16.9,-74.9,30.5,-75.4C44.1,-75.9,56.6,-75.1,44.7,-76.4Z" />
-              </svg>
-              <svg className={`absolute inset-0 w-full h-full ${theme.blob2 || "text-emerald-300"} opacity-75 transform rotate-[18deg]`} viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-                <path fill="currentColor" transform="translate(100 100) scale(0.9)" d="M51.9,-70.5C65.5,-61.7,73.7,-45.2,78.5,-28.4C83.3,-11.6,84.7,5.5,79.2,20.4C73.7,35.3,61.3,47.9,47.6,57.1C33.9,66.3,18.9,72.1,3.2,67.8C-12.5,63.5,-27.4,49.1,-41.8,38.2C-56.2,27.3,-70.1,19.9,-75.4,8.1C-80.7,-3.7,-77.4,-19.9,-69.2,-33.4C-61,-46.9,-47.9,-57.7,-34.2,-66.2C-20.5,-74.7,-6.2,-80.9,9.4,-82.9C25,-84.9,40.6,-82.7,51.9,-70.5Z" />
-              </svg>
-              <svg className={`absolute inset-0 w-full h-full ${theme.blob3 || "text-emerald-400"} opacity-90 transform rotate-[58deg]`} viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-                <path fill="currentColor" transform="translate(100 100) scale(0.7)" d="M39.6,-66C52.1,-58.5,63.7,-49.5,72.3,-37.7C80.9,-25.9,86.5,-11.3,86.1,3.1C85.7,17.5,79.3,31.7,70.2,43.4C61.1,55.1,49.3,64.3,36,70.3C22.7,76.3,7.9,79.1,-6.6,80.1C-21.1,81.1,-35.2,80.2,-47.4,73.3C-59.6,66.4,-69.9,53.5,-75.6,39.2C-81.3,24.9,-82.4,9.2,-78.9,-5.1C-75.4,-19.4,-67.3,-32.3,-56.9,-43.1C-46.5,-53.9,-33.8,-62.6,-20.5,-68C-7.2,-73.4,6.7,-75.5,20.4,-74.4C34.1,-73.3,47.6,-69,39.6,-66Z" />
-              </svg>
-
-              {/* thin icon - di-center-kan secara absolut */}
-              <div className={`absolute inset-0 m-auto z-10 ${theme.icon || "text-emerald-700"} w-10 h-10 flex items-center justify-center`}>
-                <Icon className="w-7 h-7 stroke-[1.5px]" />
-              </div>
-            </div>
-
-            <p className="text-sm text-slate-600 leading-relaxed max-w-[280px] mx-auto mb-6">{ecosystem.desc}</p>
-
-            <div className="flex justify-center">
-              <button onClick={onClose} className="text-xs font-medium text-slate-500 bg-slate-100 hover:bg-slate-200 px-5 py-2.5 rounded-full transition-colors">Close</button>
-            </div>
+          <div className="flex justify-center">
+            <button
+              onClick={onClose}
+              className="w-full sm:w-auto min-w-[140px] text-sm font-semibold text-white bg-slate-900 hover:bg-slate-800 px-6 py-3 rounded-full transition-all shadow-sm hover:shadow active:scale-95 cursor-pointer"
+            >
+              Got it
+            </button>
           </div>
+
         </div>
 
       </div>

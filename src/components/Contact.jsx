@@ -1,5 +1,6 @@
 "use client"
 
+import Link from "next/link"
 import React from "react"
 
 export function ContactSection() {
@@ -88,21 +89,20 @@ export function ContactSection() {
                             </div>
 
                             <div>
-                                <button className="group inline-flex items-center gap-3 bg-white border border-gray-200/80 shadow-md pl-2 pr-6 py-2 rounded-full transition-all duration-300 hover:shadow-lg">
+                                <Link href="/report" className="group inline-flex items-center gap-3 bg-white border border-gray-200/80 shadow-md pl-2 pr-6 py-2 rounded-full transition-all duration-300 hover:shadow-lg">
                                     <span className="w-10 h-10 rounded-full bg-[#111827] text-white flex items-center justify-center transition-transform duration-300 group-hover:scale-105">
-                                        {/* Icon Chat SVG */}
+
                                         <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
                                             <path strokeLinecap="round" strokeLinejoin="round" d="M8 10h.01M12 10h.01M16 10h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
                                         </svg>
                                     </span>
                                     <span className="text-sm font-bold text-slate-900 tracking-tight">
-                                        Open Live Support Chat
+                                        Open a Support Ticket
                                     </span>
-                                </button>
+                                </Link>
                             </div>
                         </div>
 
-                        {/* KOLOM KANAN: MOCKUP DASHBOARD */}
                         <div className="lg:col-span-7 bg-white rounded-2xl sm:rounded-3xl border border-gray-100 shadow-[0_20px_50px_rgba(0,0,0,0.06)] p-4 sm:p-6 md:p-8 relative overflow-hidden">
                             
                             {/* Header Status Live Pelaporan dengan SVG Custom */}
@@ -145,7 +145,6 @@ export function ContactSection() {
                                 </div>
                             </div>
 
-                            {/* Ringkasan Total & Response Rate */}
                             <div className="py-4">
                                 <span className="block text-[11px] sm:text-xs text-slate-400 mb-1">Total District Performance</span>
                                 <div className="flex flex-wrap items-center gap-2 sm:gap-3">
@@ -175,7 +174,6 @@ export function ContactSection() {
                                 <span>Now</span>
                             </div>
 
-                            {/* Daftar Laporan Masuk & Ditanggapi */}
                             <div className="mt-4 space-y-3">
                                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 bg-emerald-50/50 p-3 rounded-xl text-xs border border-emerald-100/60">
                                     <div>
@@ -207,13 +205,11 @@ export function ContactSection() {
                 </div>
             </div>
 
-            {/* SCROLL TO EXPLORE & BOTTOM FADE */}
             <div className="absolute bottom-6 md:bottom-10 left-1/2 -translate-x-1/2 z-40 flex flex-col items-center gap-3">
                 <span className="text-[9px] md:text-[10px] font-bold text-slate-400 tracking-widest uppercase">You're finished</span>
                 <div className="w-px h-8 md:h-12 bg-slate-300"></div>
             </div>
 
-            {/* White gradient fade di bawah */}
             <div className="absolute bottom-0 left-0 w-full h-40 bg-gradient-to-t from-[#FFFFFF] via-[#FFFFFF]/80 to-transparent z-30 pointer-events-none" />
 
         </section>

@@ -1,11 +1,6 @@
-// /app/components/ArticleContent.jsx
-// Minimal, Magic-UI-style article renderer. Supports headings (##, ###),
-// unordered lists, fenced code blocks (```lang), bold **text**, and paragraphs.
-
 import React from 'react';
 
 function renderInline(text, keyPrefix = '') {
-  // very small **bold** support
   const parts = text.split(/(\*\*[^*]+\*\*)/g);
   return parts.map((p, i) => {
     if (/^\*\*[^*]+\*\*$/.test(p)) {
@@ -20,7 +15,6 @@ function renderInline(text, keyPrefix = '') {
 }
 
 function highlightCode(code, lang) {
-  // Extremely lightweight tokenizer just for visual flair (no external dep).
   const keywords = /\b(import|from|export|default|function|const|let|var|return|if|else|for|while|new|class|extends|typeof|of|in|null|undefined|true|false)\b/g;
   const strings = /("[^"]*"|'[^']*'|`[^`]*`)/g;
   const tags = /(&lt;\/?[A-Za-z][A-Za-z0-9]*)/g;
@@ -62,7 +56,7 @@ export default function ArticleContent({ article }) {
         codeLines.push(lines[i]);
         i++;
       }
-      i++; // skip closing ```
+      i++;
       blocks.push({ type: 'code', lang, content: codeLines.join('\n') });
       continue;
     }
@@ -107,7 +101,7 @@ export default function ArticleContent({ article }) {
       continue;
     }
 
-    // Paragraph (accumulate consecutive text lines)
+    // Paragraph
     const paraLines = [line];
     i++;
     while (

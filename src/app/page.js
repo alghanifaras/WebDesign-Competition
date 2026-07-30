@@ -10,11 +10,17 @@ export default function Home() {
     <main className="w-full min-h-screen bg-white">
       <HeroSection />
 
-      <AboutUs />
+      <section id="about">
+        <AboutUs />
+      </section>
 
-      <Feature />
+      <section id="feature">
+        <Feature />
+      </section>
 
-      <ContactSection />
+      <section id="contact">
+        <ContactSection />
+      </section>
     </main>
   );
 }

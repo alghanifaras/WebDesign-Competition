@@ -5,7 +5,6 @@ import { OrbitingCircles } from "@/components/ui/orbiting-circles";
 import { Globe } from "./ui/globe";
 import ToneCards from "./ToneCards";
 
-// Data ekosistem dengan Tema Warna bernuansa Smart City/Eco (Turunan Hijau, Teal, Biru, dan Netral)
 const ecosystemData = [
   {
     id: "living",
@@ -216,7 +215,6 @@ const SmartEcosystem = () => {
   );
 };
 
-// Komponen Pembungkus Ikon (Slight hover interaction)
 const IconWrapper = ({ children, accentColor, onClick, isActive }) => (
   <div
     onClick={onClick}

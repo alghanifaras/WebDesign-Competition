@@ -1,17 +1,17 @@
 "use client"
 
+import Link from "next/link";
 import React from "react";
 
 const HeroSection = () => {
   return (
     <section
-      // Menggunakan h-[100dvh] untuk menangani UI browser mobile dengan lebih baik
       className="relative w-screen h-[100dvh] min-h-screen overflow-hidden"
       style={{
         fontFamily: "'Poppins', sans-serif"
       }}
     >
-      {/* LAYER 0: Sky Background Base */}
+      {/* LAYER 0 */}
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
@@ -34,7 +34,7 @@ const HeroSection = () => {
         }}
       />
 
-      {/* LAYER 2: Mist/Haze overlay (Atmospheric effect) */}
+      {/* LAYER 2*/}
       <div
         aria-hidden
         className="absolute -inset-10 pointer-events-none scale-110"
@@ -48,7 +48,7 @@ const HeroSection = () => {
         }}
       />
 
-      {/* LAYER 4: Mid-ground landscape detail */}
+      {/* LAYER 4 */}
       <div
         className="absolute inset-0 bg-cover pointer-events-none"
         style={{
@@ -62,7 +62,7 @@ const HeroSection = () => {
         }}
       />
 
-      {/* LAYER 5: Grass Foreground */}
+      {/* LAYER 5 */}
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
@@ -114,7 +114,6 @@ const HeroSection = () => {
           For the citizens who refuse to compromise.
         </p>
 
-        {/* Headline - Disesuaikan ukuran responsifnya */}
         <h1
           className="text-5xl sm:text-6xl md:text-7xl lg:text-[6.5rem] font-medium leading-[1.1] mb-4 md:mb-6 tracking-tight max-w-5xl"
           style={{
@@ -140,12 +139,12 @@ const HeroSection = () => {
           Connect citizens, transportation, environment, and public services through one intelligent digital ecosystem.
         </p>
 
-        {/* CTA Buttons - Dirubah menjadi flex-col di mobile dan baris di layar lebih besar */}
         <div
           className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-5 w-full max-w-[280px] sm:max-w-none mx-auto"
           style={{ animation: "fadeInUp 0.8s ease-out 0.4s both" }}
         >
-          <button
+          <Link
+            href="#about"
             className="group w-full sm:w-auto flex items-center justify-between sm:justify-start gap-3 sm:gap-4 px-2 py-2 pr-4 sm:pr-6 rounded-full font-semibold text-[14px] sm:text-[15px] transition-all duration-300 hover:shadow-xl hover:scale-105"
             style={{
               backgroundColor: "#ffffff",
@@ -159,9 +158,10 @@ const HeroSection = () => {
               </svg>
             </div>
             <span className="flex-1 text-center sm:text-left pr-2 sm:pr-0">Explore Smart Ecosystem</span>
-          </button>
+          </Link>
 
-          <button
+          <Link
+            href="#feature"
             className="w-full sm:w-auto px-6 sm:px-7 py-3 sm:py-3.5 rounded-full font-semibold text-[14px] sm:text-[15px] transition-all duration-300 hover:scale-105"
             style={{
               background: "rgba(255, 255, 255, 0.35)",
@@ -174,11 +174,10 @@ const HeroSection = () => {
             }}
           >
             Learn more
-          </button>
+          </Link>
         </div>
       </div>
 
-      {/* LAYER 6: TRANSISI PEMBATAS KE SECTION BERIKUTNYA */}
       <div 
         className="absolute bottom-0 left-0 w-full h-24 md:h-32 pointer-events-none" 
         style={{ 

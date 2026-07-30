@@ -7,7 +7,6 @@ import { BentoCard, BentoGrid } from "./ui/bento-grid"
 import { AnimatedList } from "./ui/animated-list"
 import { AnimatedBeam } from "./ui/animated-beam"
 
-// --- CUSTOM SVG ICONS GREEN ECOSYSTEM ---
 const GreenIcons = {
   leaf: () => (
     <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#10b981" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -71,7 +70,6 @@ const GreenIcons = {
   ),
 };
 
-// Data untuk Marquee (Smart Mobility)
 const trafficData = [
   { name: "Ahmad_Yani_Junction.ai", body: "Traffic density normal. Signal timing optimized automatically." },
   { name: "Central_Parking_04.json", body: "Available slots: 42. Real-time guidance active." },
@@ -79,7 +77,6 @@ const trafficData = [
   { name: "EV_Charging_Hub_A.dat", body: "Grid load balanced. Solar input operating at 45 capacity." },
 ];
 
-// Data untuk Animated List (Public Safety Notifications)
 const notifications = [
   {
     name: "CCTV AI Alert",
@@ -113,26 +110,25 @@ const NotificationItem = ({ name, description, icon, time }) => {
       className={cn(
         "relative mx-auto min-h-fit w-full max-w-[400px] cursor-pointer overflow-hidden rounded-2xl p-3 md:p-4",
         "transition-all duration-200 ease-in-out hover:scale-[103%]",
-        "bg-white/80 backdrop-blur-md border border-gray-100 shadow-sm"
+        "bg-white/85 backdrop-blur-md border border-gray-100 shadow-sm"
       )}
     >
       <div className="flex flex-row items-center gap-3">
         <div className="flex size-9 md:size-10 shrink-0 items-center justify-center rounded-2xl bg-emerald-50 text-emerald-600">
           {icon}
         </div>
-        <div className="flex flex-col overflow-hidden">
-          <figcaption className="flex flex-row items-center justify-between text-xs md:text-sm font-semibold text-gray-900">
-            <span>{name}</span>
-            <span className="text-[10px] md:text-xs font-normal text-gray-400">{time}</span>
-          </figcaption>
-          <p className="text-[11px] md:text-xs text-gray-500 font-normal leading-relaxed">{description}</p>
+        <div className="flex flex-col flex-1 min-w-0 overflow-hidden">
+          <div className="flex flex-row items-center justify-between gap-2 w-full">
+            <span className="text-xs md:text-sm font-semibold text-slate-900 truncate">{name}</span>
+            <span className="text-[10px] md:text-xs font-normal text-slate-500 shrink-0 w-[55px] text-right">{time}</span>
+          </div>
+          <p className="text-[11px] md:text-xs text-slate-600 font-normal leading-relaxed truncate">{description}</p>
         </div>
       </div>
     </figure>
   );
 };
 
-// --- KOMPONEN CIRCLE & CUSTOM SVG UNTUK ANIMATED BEAM ECO MANAGEMENT ---
 const Circle = forwardRef(({ className, children }, ref) => {
   return (
     <div
@@ -214,18 +210,18 @@ const features = [
     cta: "Learn more",
     className: "col-span-3 lg:col-span-1 min-h-[340px] md:min-h-[380px]",
     background: (
-      <div className="absolute top-12 w-full px-4 [mask-image:linear-gradient(to_top,transparent_30%,#000_100%)]">
+      <div className="absolute top-12 w-full px-4 [mask-image:linear-gradient(to_top,transparent_15%,#000_85%)]">
         {trafficData.map((f, idx) => (
           <div
             key={idx}
             className={cn(
               "relative w-full mb-3 cursor-pointer overflow-hidden rounded-xl border p-3",
-              "border-gray-950/[.08] bg-white/60 backdrop-blur-sm hover:bg-white/90",
+              "border-slate-200 bg-white/90 backdrop-blur-md shadow-sm hover:bg-white",
               "transition-all duration-300 ease-out"
             )}
           >
-            <span className="text-xs font-semibold text-slate-800">{f.name}</span>
-            <p className="mt-1 text-[11px] text-slate-500 leading-tight">{f.body}</p>
+            <span className="text-xs font-semibold text-slate-900">{f.name}</span>
+            <p className="mt-1 text-[11px] text-slate-700 font-medium leading-tight">{f.body}</p>
           </div>
         ))}
       </div>
@@ -265,27 +261,27 @@ const features = [
     href: "#",
     cta: "Learn more",
     background: (
-      <div className="absolute top-14 md:top-16 right-4 left-4 p-4 md:p-5 rounded-2xl bg-white/70 backdrop-blur-md border border-gray-100 shadow-sm [mask-image:linear-gradient(to_top,transparent_20%,#000_100%)] transition-all duration-300 ease-out group-hover:scale-105">
+      <div className="absolute top-14 md:top-16 right-4 left-4 p-4 md:p-5 rounded-2xl bg-white/90 backdrop-blur-md border border-slate-200 shadow-sm [mask-image:linear-gradient(to_top,transparent_20%,#000_100%)] transition-all duration-300 ease-out group-hover:scale-105">
         <div className="flex items-center justify-between mb-3 md:mb-4">
-          <span className="text-xs font-semibold text-gray-700">Citizen Portal Activity</span>
+          <span className="text-xs font-semibold text-slate-800">Citizen Portal Activity</span>
           <span className="text-[10px] md:text-xs font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-full">+24% Today</span>
         </div>
         <div className="space-y-3">
           <div>
-            <div className="flex justify-between text-[11px] text-gray-500 mb-1">
+            <div className="flex justify-between text-[11px] text-slate-600 font-medium mb-1">
               <span>E-Services Request</span>
-              <span className="font-medium text-gray-800">88%</span>
+              <span className="font-semibold text-slate-900">88%</span>
             </div>
-            <div className="w-full bg-gray-100 h-2 rounded-full overflow-hidden">
+            <div className="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
               <div className="bg-emerald-500 h-full rounded-full w-[88%]"></div>
             </div>
           </div>
           <div>
-            <div className="flex justify-between text-[11px] text-gray-500 mb-1">
+            <div className="flex justify-between text-[11px] text-slate-600 font-medium mb-1">
               <span>Public Feedback</span>
-              <span className="font-medium text-gray-800">64%</span>
+              <span className="font-semibold text-slate-900">64%</span>
             </div>
-            <div className="w-full bg-gray-100 h-2 rounded-full overflow-hidden">
+            <div className="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
               <div className="bg-blue-500 h-full rounded-full w-[64%]"></div>
             </div>
           </div>
@@ -301,7 +297,6 @@ export function Feature() {
       className="relative flex w-full flex-col items-center justify-start py-20 md:py-28 bg-[#F6FAF5] border-b border-gray-200/80  z-20 overflow-hidden"
       style={{ fontFamily: "'Poppins', sans-serif" }}
     >
-      {/* Subtle Grid Pattern dengan efek fade */}
       <div 
         className="absolute inset-0 pointer-events-none z-0"
         style={{
@@ -315,7 +310,6 @@ export function Feature() {
         }}
       />
 
-      {/* Header / Title Section dengan tipografi konsisten (serif italic + underline melengkung) */}
       <div className="text-center z-20 px-6 mb-10 md:mb-16">
         <h2 className="text-4xl md:text-5xl lg:text-[4.2rem] font-bold text-slate-950 tracking-tight leading-tight mb-4">
           Intelligent <span className="relative inline-block font-serif italic font-normal text-emerald-600">
@@ -338,7 +332,6 @@ export function Feature() {
         </p>
       </div>
 
-      {/* Bento Grid Layout */}
       <div className="w-full max-w-[1200px] px-4 md:px-8 z-20 mb-8">
         <BentoGrid className="lg:grid-rows-2">
           {features.map((feature, idx) => (
@@ -347,7 +340,6 @@ export function Feature() {
         </BentoGrid>
       </div>
 
-      {/* EFEK FADE DI BAWAH SECTION untuk transisi mulus ke section berikutnya */}
       <div className="absolute bottom-0 left-0 right-0 h-36 bg-gradient-to-t from-[#F6FAF5] via-[#F6FAF5]/80 to-transparent pointer-events-none z-30" />
     </section>
   );
