@@ -2,7 +2,7 @@
 
 # 🌐 WebDesign-Competition
 
-Sebuah template/portofolio web interaktif berbasis **Next.js (App Router)** yang menampilkan halaman berita, galeri, dan komponen UI modular. Cocok digunakan sebagai *landing page*, portofolio, atau demo untuk kompetisi desain web.
+Sebuah webbsite kota interaktif berbasis **Next.js (App Router)** yang menampilkan halaman berita, galeri, dan komponen UI modular.
 
 [Fitur](#-fitur-utama) • [Teknologi](#️-teknologi-yang-digunakan) • [Struktur Proyek](#-struktur-proyek) • [Instalasi](#-cara-menjalankan) • [Skrip](#-skrip-yang-tersedia)
 
