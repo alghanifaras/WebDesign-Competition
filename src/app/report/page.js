@@ -62,13 +62,13 @@ export default function ReportPage() {
                             >
                                 <div className="absolute inset-0 rounded-full bg-[#D1F1E1] border border-emerald-200 shadow-sm overflow-hidden">
                                     <img
-                                        src="/assets/landmark.png"
+                                        src="/assets/landmark.webp"
                                         alt="Landmark"
                                         className="absolute left-1/2 bottom-[-22px] sm:bottom-[-32px] -translate-x-1/2 w-[94%] object-contain"
                                     />
                                 </div>
                                 <img
-                                    src="/assets/landmark.png"
+                                    src="/assets/landmark.webp"
                                     alt="Landmark"
                                     className="absolute left-1/2 bottom-[-20px] sm:bottom-[-30px] -translate-x-1/2 w-[94%] pointer-events-none drop-shadow-md z-10"
                                     style={{ clipPath: "inset(0 0 58% 0)" }}

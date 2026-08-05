@@ -25,7 +25,7 @@ export function ContactSection() {
             {/* BATU KIRI */}
             <div className="absolute bottom-[-100px] -left-12 sm:-left-20 md:-left-10 lg:-left-20 md:-translate-x-[35vw] w-[55%] sm:w-[45%] md:w-[40%] lg:w-[35%] xl:w-[72%] z-10 pointer-events-none flex items-end justify-start drop-shadow-2xl">
                 <img
-                    src="/assets/rock2.png"
+                    src="/assets/rock2.webp"
                     alt="Rock Decoration Left"
                     className="w-full h-auto object-contain object-bottom mix-blend-multiply opacity-100 md:translate-y-20 md:translate-x-20"
                 />
@@ -34,7 +34,7 @@ export function ContactSection() {
             {/* BATU KANAN */}
             <div className="absolute bottom-[-150px] -right-16 sm:-right-24 md:-right-10 lg:-right-20 md:-translate-x-[-27vw] w-[55%] sm:w-[45%] md:w-[40%] lg:w-[75%] xl:w-[70%] z-30 pointer-events-none flex items-end justify-end drop-shadow-2xl">
                 <img
-                    src="/assets/rock.png"
+                    src="/assets/rock.webp"
                     alt="Rock Decoration Right"
                     className="w-full h-auto object-contain object-bottom mix-blend-multiply opacity-100 transform scale-x-[-1] md:translate-y-8 md:translate-x-15"
                 />

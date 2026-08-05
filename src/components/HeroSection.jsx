@@ -25,7 +25,7 @@ const HeroSection = () => {
         className="absolute inset-0 bg-cover pointer-events-none"
         style={{
           zIndex: 1,
-          backgroundImage: `url('/hero/hero2.png')`,
+          backgroundImage: `url('/hero/hero2.webp')`,
           opacity: 0.6,
           backgroundPosition: "center 85%",
           backgroundSize: "cover",
@@ -53,7 +53,7 @@ const HeroSection = () => {
         className="absolute inset-0 bg-cover pointer-events-none"
         style={{
           zIndex: 12,
-          backgroundImage: `url('/hero/hero2.png')`,
+          backgroundImage: `url('/hero/hero2.webp')`,
           opacity: 0.8,
           backgroundPosition: "center 80%",
           backgroundSize: "cover",
@@ -67,7 +67,7 @@ const HeroSection = () => {
         className="absolute inset-0 pointer-events-none"
         style={{
           zIndex: 15,
-          backgroundImage: `url('/hero/hero.png')`,
+          backgroundImage: `url('/hero/hero.webp')`,
           backgroundSize: "cover",
           backgroundPosition: "center bottom",
           opacity: 0.95,
