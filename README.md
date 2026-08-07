@@ -107,7 +107,3 @@ Ikuti langkah-langkah di bawah ini untuk menjalankan proyek secara lokal dari *f
 5. Buka [http://localhost:3000](http://localhost:3000) melalui peramban (browser) pilihan Anda untuk melihat hasil aplikasinya.
 
 ---
-
-## 📄 Lisensi
-
-Proyek ini bersifat open-source dan bebas digunakan untuk keperluan pembelajaran, portofolio, maupun kompetisi desain web.
